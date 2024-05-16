@@ -15,11 +15,9 @@ label ::= label_name ":"
 
 instr ::= op0
         | op1 integer
-        | op1 char
-        | op1 address
-        | op2 address
-        | op3 arg
-        | op4 label_name
+        | op2 arg
+        | op3 label_name
+        | op4 address
 
 op0 ::= "inc"
       | "dec"
@@ -34,11 +32,12 @@ op0 ::= "inc"
       | "swap"
       | "print"
 
-op1 ::= | "push"
-        | "word"
+op1 ::= "push"
+
+op2 ::= "word"
         | "resw"
 
-op2 ::= "jmp"
+op3 ::= "jmp"
       | "jz"
       | "jnz"
       | "jn"
@@ -46,7 +45,7 @@ op2 ::= "jmp"
       | "call"
       | "out"
 
-op3 ::= "push_addr"
+op4 ::= "push_addr"
         | "pop_addr"
 
 integer ::= [ "-" ] { <any of "0-9"> }
