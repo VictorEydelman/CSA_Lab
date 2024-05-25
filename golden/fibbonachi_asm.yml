@@ -2,7 +2,7 @@ in_sourse: |-
     num:
         push_addr 101
         push 2
-        div
+        div 
         push 2
         mul
         push_addr 101
