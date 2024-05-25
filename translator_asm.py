@@ -12,23 +12,22 @@ def translate_stage(text):
             continue
         if token.endswith(":"):
             assert token.strip(":") not in labels, "{}".format(token.strip(":"))
-            labels[token.strip(":")]=len(code)
+            labels[token.strip(":")]=len(code)+4
             if token.strip(":") == "_start":
-                print(num)
-                code.insert(0,{"_start": num})
+                print(len(code))
+                code.insert(0,{"_start": len(code)+3})
         elif " " in token:
             sub_token=token.split(" ")
             assert len(sub_token)==2,"{}".format(token)
             mnemonic,arg=sub_token
             opcode=Opcode(mnemonic)
-            #
-            code.append({"index":len(code)+1,"opcode":opcode,"arg":arg,"term": Term(num,0,token)})
+            code.append({"index":len(code)+4,"opcode":opcode,"arg":arg,"term": Term(num,0,token)})
         else:
             opcode = Opcode(token)
-            #
-            code.append({"index": len(code)+1, "opcode": opcode,"arg":"","term": Term(num,0,token)})
+            code.append({"index": len(code)+4, "opcode": opcode,"term": Term(num,0,token)})
 
     return labels, code
+
 
 def translate_stage2(labels,code):
     for instruction in code:
@@ -36,6 +35,7 @@ def translate_stage2(labels,code):
             label=instruction["arg"]
             instruction["arg"]=labels[label]
     return code
+
 
 def translate(text):
     labels, code = translate_stage(text)
