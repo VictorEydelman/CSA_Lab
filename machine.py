@@ -1,7 +1,6 @@
 import logging
 import sys
 
-import self as self
 
 from isa import read_code, Opcode
 
