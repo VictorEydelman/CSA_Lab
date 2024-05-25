@@ -14,7 +14,6 @@ def test_translator_asm_and_machine(golden, caplog):
     """Почти полная копия test_translator_and_machine из golden_bf_test. Детали
     см. там."""
     caplog.set_level(logging.DEBUG)
-
     with tempfile.TemporaryDirectory() as tmpdirname:
         source = os.path.join(tmpdirname, "source.asm")
         input_stream = os.path.join(tmpdirname, "input.txt")
