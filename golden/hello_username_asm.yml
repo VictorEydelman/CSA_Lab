@@ -49,7 +49,7 @@ in_sourse: |-
       store sym_out
       store what
       store sym_in
-      load
+      load 
       store
       store sym_out
       store hello
