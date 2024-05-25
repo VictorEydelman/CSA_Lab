@@ -15,7 +15,7 @@ class DataPath:
     Z = None
     N = None
     tick = None
-    permission_interruption = None
+    interruption = None
     tick_now = None
 
     def __init__(self, memory_size, input_token, input_address):
@@ -29,16 +29,16 @@ class DataPath:
         self.Z = 0
         self.N = 0
         self.tick = 0
-        self.permission_interruption = True
+        self.interruption = True
         self.tick_now = 0
 
     def signal_tick(self):
         self.tick += 1
-        self.interruption()
+        self.a_interruption()
 
-    def interruption(self):
+    def a_interruption(self):
         num = self.tick
-        while num in self.input_address and self.permission_interruption:
+        while num in self.input_address and self.interruption:
 
             a=self.input_token[self.input_address.index(num)]
             self.memory[0] = {"opcode": self.memory[0]["opcode"], "arg": self.memory[0]["arg"]+a}
