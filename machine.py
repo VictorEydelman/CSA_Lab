@@ -138,7 +138,7 @@ class ControlUnit:
 
     def __init__(self, code, data_path):
         self.data_path = data_path
-        self.pc = int(code[0]["_start"])
+        self.pc = int(code[0]["_start"])+1
         del code[0]
         data_path.s(code)
         self.code = code
@@ -326,7 +326,6 @@ def simulation(code, input_token, input_address, memory, limit):
     data_path = DataPath(memory, input_token, input_address)
     control_unit = ControlUnit(code, data_path)
     i = 0
-    logging.debug("%s", control_unit)
 
     for i in range(limit):
         rez = control_unit.d()
