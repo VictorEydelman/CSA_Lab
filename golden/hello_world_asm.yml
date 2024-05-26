@@ -32,7 +32,7 @@ out_code: |-
   {"index": 14, "opcode": "word", "arg": "108", "term": [11, 0, "word 108"]},
   {"index": 15, "opcode": "word", "arg": "100", "term": [12, 0, "word 100"]},
   {"index": 17, "opcode": "store", "arg": 4, "term": [14, 0, "store hello_world"]},
-  {"index": 18, "opcode": "halt", "term": [15, 0, "halt"]}]
+  {"index": 18, "opcode": "halt", "arg": "", "term": [15, 0, "halt"]}]
 out_stdout: |-
   Hello World                                                            
   2
