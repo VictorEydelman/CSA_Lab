@@ -110,7 +110,8 @@ class DataPath:
             left = self.stack_data.pop()
         if right_sel is not None:
             right = self.stack_data.pop()
-        if operation == "inc" or operation == "dec" or operation == "mul" or operation == "div" or operation == "swap" or operation == "add" or operation == "sub":
+        if operation == "inc" or operation == "dec" or operation == "mul" or operation == "div" or operation == "swap"\
+                or operation == "add" or operation == "sub":
             self.operation_in_alu(operation, left, right)
         elif operation == "out":
             i = 0
@@ -149,7 +150,7 @@ class ControlUnit:
         data_path.s(code)
         self.code = code
 
-    def operation(self, opcode):
+    def inc_dec(self, opcode):
         if opcode == Opcode.INC:
             self.data_path.in_alu("inc", left_sel="stack")
             self.data_path.signal_stack()
@@ -160,6 +161,10 @@ class ControlUnit:
             self.data_path.signal_stack()
             self.data_path.signal_tick()
             self.data_path.a_interruption()
+
+    def operation(self, opcode):
+        if opcode == Opcode.INC or opcode == Opcode.DEC:
+            self.inc_dec(opcode)
         elif opcode == Opcode.ADD:
             self.data_path.in_alu("add", left_sel="stack", right_sel="stack")
             self.data_path.signal_stack()
@@ -278,7 +283,8 @@ class ControlUnit:
         self.pc += 1
         ir = self.data_path.memory[self.pc]
         opcode = ir["opcode"]
-        if opcode == Opcode.JMP or opcode == Opcode.JZ or opcode == Opcode.JNZ or opcode == Opcode.JN or opcode == Opcode.JNS:
+        if opcode == Opcode.JMP or opcode == Opcode.JZ or opcode == Opcode.JNZ or opcode == Opcode.JN\
+                or opcode == Opcode.JNS:
             self.branching(opcode, ir["arg"])
         elif opcode == Opcode.HALT:
             return "halt"
@@ -344,9 +350,9 @@ def simulation(code, input_token, input_address, memory, limit):
     return "".join(str(data_path.memory[2]["arg"])), i + 1, data_path.tick
 
 
-def main(sourse, target):
-    code = read_code(sourse)
-    with open(target, encoding="utf-8") as file:
+def main(program_file, input_file):
+    code = read_code(program_file)
+    with open(input_file, encoding="utf-8") as file:
         target = file.read()
         input_token = []
         input_address = []
@@ -366,5 +372,5 @@ if __name__ == "__main__":
     logging.getLogger().setLevel(logging.DEBUG)
     logging.basicConfig(format="%(levelname)-7s %(module)s:%(funcName)-13s %(message)s")
     assert len(sys.argv) == 3, "Wrong arguments: machine.py <input_file> <target_file>"
-    _, sourse, target = sys.argv
-    main(sourse, target)
+    _, source, target = sys.argv
+    main(source, target)
