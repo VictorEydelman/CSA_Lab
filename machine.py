@@ -303,11 +303,11 @@ def main(sourse, target):
         target = file.read()
         input_token = []
         input_address = []
-        t=(eval(target))
-        for num,char in t:
-            input_address.append(num)
-            input_token.append(char)
-        print(input_address,input_token)
+        if target!="":
+            t=(eval(target))
+            for num,char in t:
+                input_address.append(num)
+                input_token.append(char)
 
     output, instr, tick = simulation(code, input_token, input_address, 200, 1000)
     print("".join(output))
