@@ -38,10 +38,7 @@ def translate_stage2(labels, code):
 
 def translate(text):
     labels, code = translate_stage(text)
-
-    code = translate_stage2(labels, code)
-    return code
-
+    return translate_stage2(labels, code)
 
 def main(source, target):
     with open(source, encoding="utf-8") as f:

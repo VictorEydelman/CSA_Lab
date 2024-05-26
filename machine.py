@@ -1,8 +1,7 @@
 import logging
 import sys
 
-
-from isa import read_code, Opcode
+from isa import Opcode, read_code
 
 
 class DataPath:
@@ -11,7 +10,7 @@ class DataPath:
     input_token = None
     input_address = None
     memory_size = None
-    stack_data = []
+    stack_data = None
     Z = None
     N = None
     tick = None
@@ -29,7 +28,7 @@ class DataPath:
         self.input_address = input_address
         self.ir = {"opcode": Opcode.NOP.value}
         self.memory_size = memory_size
-        self.stack_data.append(0)
+        self.stack_data=[]
         self.Z = 0
         self.N = 0
         self.tick = 0
@@ -125,22 +124,18 @@ class DataPath:
     def to_stack(self, arg):
         self.stack_data.append(arg)
 
-    def signal_output(self):
-        symbol = self.stack_data[-1]
-        logging.debug("output: %s << %s", repr("".join(self.memory[2]["arg"])), repr(symbol))
-        self.memory[2]["arg"] += str(symbol)
-
 
 class ControlUnit:
     data_path = None
     pc = None
     code = None
-    stack_return = []
+    stack_return = None
 
     def __init__(self, code, data_path):
         self.data_path = data_path
         self.pc = int(code[0]["_start"]) + 1
         del code[0]
+        self.stack_return=[]
         data_path.s(code)
         self.code = code
 
@@ -311,16 +306,13 @@ class ControlUnit:
         return ""
 
     def __repr__(self):
-        state_repr = "PC: {:3} MEM_OUT: {}".format(self.pc, self.data_path.memory[self.pc])
+        state_repr = "PC: {} MEM_OUT: {}".format(self.pc, self.data_path.memory[self.pc])
         instr = self.data_path.memory[self.pc]
         opcode = instr["opcode"]
         instr_repr = str(opcode)
         if "arg" in instr:
             instr_repr += " {}".format(instr["arg"])
-        if "term" in instr:
-            term = instr["term"]
-            instr_repr += " ('{}'@{}:{})".format(term[0], term[1], term[2])
-        return "{} \t{}".format(state_repr, instr_repr)
+        return "{} {}".format(state_repr, instr_repr)
 
 
 def simulation(code, input_token, input_address, memory, limit):
