@@ -88,7 +88,7 @@ class DataPath:
             self.stack_data.append(right)
             self.alu = right
 
-    def in_alu_with_memor(self, operation, left, right):
+    def in_alu_with_memory(self, operation, left, right):
         if operation == "from_memory":
             self.alu = self.memory[int(left)]["arg"]
         elif operation == "to_memory":
@@ -123,6 +123,8 @@ class DataPath:
                 self.signal_tick()
                 self.a_interruption()
                 i += 1
+        else:
+            self.in_alu_with_memory(operation,left,right)
         self.flag()
 
     def signal_stack(self):
