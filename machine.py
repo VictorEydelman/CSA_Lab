@@ -54,7 +54,6 @@ class DataPath:
     def s(self, code: list):
         for mem in code:
             self.memory[mem["index"]] = {"opcode": mem["opcode"], "arg": mem["arg"]}
-
     def flag(self):
         if not isinstance(self.alu, str):
             if self.alu == 0:
