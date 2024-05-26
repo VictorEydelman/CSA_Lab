@@ -35,16 +35,19 @@ class DataPath:
 
     def signal_tick(self):
         self.tick += 1
-        self.a_interruption()
 
     def a_interruption(self):
         num = self.tick
-        while num in self.input_address and self.interruption:
+        while num <= self.tick:
+            while num in self.input_address and self.interruption:
+                a = self.input_token[self.input_address.index(num)]
+                self.memory[0] = {"opcode": self.memory[0]["opcode"], "arg": self.memory[0]["arg"]+a}
+                self.signal_tick()
+                self.memory[1] = {"opcode": self.memory[0]["opcode"], "arg": ord(a)}
+                self.input_address[self.input_address.index(num)] = 0
+                self.signal_tick()
+            num += 1
 
-            a=self.input_token[self.input_address.index(num)]
-            self.memory[0] = {"opcode": self.memory[0]["opcode"], "arg": self.memory[0]["arg"]+a}
-            self.memory[1] = {"opcode": self.memory[0]["opcode"], "arg": ord(a)}
-            self.input_address[self.input_address.index(num)] = 0
     def s(self, code: list):
         for mem in code:
             try:
@@ -100,13 +103,16 @@ class DataPath:
             while int(right) > i and symbol!=0 and self.memory[left + i]["opcode"] == Opcode.WORD:
                 symbol = int(self.memory[left + i]["arg"])
                 self.signal_tick()
+                self.a_interruption()
                 self.alu = symbol
                 self.memory[2]["arg"]+=chr(symbol)
                 self.signal_tick()
+                self.a_interruption()
                 i += 1
         elif operation == "swap":
             self.stack_data.append(left)
             self.signal_tick()
+            self.a_interruption()
             self.stack_data.append(right)
             self.alu = right
         self.flag()
@@ -144,126 +150,163 @@ class ControlUnit:
             self.data_path.in_alu("inc", left_sel="stack")
             self.data_path.signal_stack()
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
         elif opcode == Opcode.DEC:
             self.data_path.in_alu("inc", left_sel="stack")
             self.data_path.signal_stack()
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
         elif opcode == Opcode.JMP:
             arg=ir["arg"]
             self.pc = arg - 1
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
         elif opcode == Opcode.JZ:
             arg=ir["arg"]
             if self.data_path.Z == 1:
                 self.pc = arg - 1
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
         elif opcode == Opcode.JNZ:
             arg=ir["arg"]
             if self.data_path.Z == 0:
                 self.pc = arg - 1
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
         elif opcode == Opcode.JN:
             arg=ir["arg"]
             if self.data_path.N == 1:
                 self.pc = arg - 1
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
         elif opcode == Opcode.JNS:
             arg=ir["arg"]
             if self.data_path.N == 0:
                 self.pc = arg - 1
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
         elif opcode == Opcode.HALT:
             return "halt"
         elif opcode == Opcode.PUSH_ADDR:
             arg=ir["arg"]
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
             self.data_path.to_stack(arg)
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
             self.data_path.in_alu("from_memory", left_sel="stack")
             self.data_path.signal_stack()
             #print(self.data_path.memory[0],self.data_path.memory[1],self.data_path.memory[2])
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
         elif opcode == Opcode.PUSH:
             arg=ir["arg"]
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
             self.data_path.to_stack(arg)
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
         elif opcode == Opcode.POP:
             self.data_path.stack_data.pop()
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
         elif opcode == Opcode.POP_ADDR:
             arg = ir["arg"]
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
             self.data_path.to_stack(arg)
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
             self.data_path.in_alu("to_memory", left_sel="stack", right_sel="stack")
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
         elif opcode == Opcode.ADD:
             self.data_path.in_alu("add", left_sel="stack", right_sel="stack")
             self.data_path.signal_stack()
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
         elif opcode == Opcode.SUB:
             self.data_path.in_alu("sub", left_sel="stack", right_sel="stack")
             self.data_path.signal_stack()
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
         elif opcode == Opcode.MUL:
             self.data_path.in_alu("mul", left_sel="stack", right_sel="stack")
             self.data_path.signal_stack()
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
         elif opcode == Opcode.DIV:
             self.data_path.in_alu("div", left_sel="stack", right_sel="stack")
             self.data_path.signal_stack()
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
         elif opcode == Opcode.CALL:
             arg = ir["arg"]
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
             self.stack_return.append(self.pc)
             self.pc = arg - 1
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
         elif opcode == Opcode.RET:
             self.pc = self.stack_return.pop()
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
         elif opcode == Opcode.EI:
             self.data_path.interruption = True
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
         elif opcode == Opcode.DI:
             self.data_path.interruption = False
             self.data_path.signal_tick()
         elif opcode == Opcode.LOAD:
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
             self.data_path.to_stack(0)
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
             self.data_path.in_alu("from_memory", left_sel="stack")
             self.data_path.signal_stack()
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
         elif opcode == Opcode.LOAD_SYMBOL:
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
             self.data_path.to_stack(1)
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
             self.data_path.in_alu("from_memory", left_sel="stack")
             self.data_path.signal_stack()
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
         elif opcode == Opcode.STORE:
             try:
                 arg = ir["arg"]
                 self.data_path.signal_tick()
+                self.data_path.a_interruption()
                 self.data_path.to_stack(arg)
                 self.data_path.in_alu("from_memory", left_sel="stack")
                 self.data_path.signal_tick()
+                self.data_path.a_interruption()
                 self.data_path.signal_stack()
                 self.data_path.to_stack(arg+1)
                 self.data_path.signal_tick()
+                self.data_path.a_interruption()
                 self.data_path.in_alu("out", left_sel="stack",right_sel="stack")
                 self.data_path.signal_tick()
+                self.data_path.a_interruption()
             except:
                 self.data_path.to_stack(2)
                 self.data_path.signal_tick()
+                self.data_path.a_interruption()
                 self.data_path.in_alu("to_memory", left_sel="stack", right_sel="stack")
                 self.data_path.signal_stack()
                 self.data_path.signal_tick()
+                self.data_path.a_interruption()
         elif opcode == Opcode.SWAP:
             self.data_path.in_alu("swap", left_sel="stack",right_sel="stack")
             self.data_path.signal_tick()
+            self.data_path.a_interruption()
         return ""
 
     def __repr__(self):
