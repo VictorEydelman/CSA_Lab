@@ -325,7 +325,6 @@ class ControlUnit:
 def simulation(code, input_token, input_address, memory, limit):
     data_path = DataPath(memory, input_token, input_address)
     control_unit = ControlUnit(code, data_path)
-    i = 1
 
     for i in range(limit):
         rez = control_unit.d()
@@ -334,7 +333,7 @@ def simulation(code, input_token, input_address, memory, limit):
         logging.debug("%s", control_unit)
 
     logging.info("output_buffer: %s", repr("".join(str(data_path.memory[2]["arg"]))))
-    return "".join(str(data_path.memory[2]["arg"])), i, data_path.tick
+    return "".join(str(data_path.memory[2]["arg"])), i+1, data_path.tick
 
 
 def main(sourse, target):
