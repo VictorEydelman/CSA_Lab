@@ -53,10 +53,7 @@ class DataPath:
 
     def s(self, code: list):
         for mem in code:
-            try:
-                self.memory[mem["index"]] = {"opcode": mem["opcode"], "arg": mem["arg"]}
-            except:
-                self.memory[mem["index"]] = {"opcode": mem["opcode"], "arg": ""}
+            self.memory[mem["index"]] = {"opcode": mem["opcode"], "arg": mem["arg"]}
 
     def flag(self):
         if not isinstance(self.alu, str):
@@ -284,8 +281,8 @@ class ControlUnit:
             self.data_path.signal_tick()
             self.data_path.a_interruption()
         elif opcode == Opcode.STORE:
-            try:
-                arg = ir["arg"]
+            arg = ir["arg"]
+            if arg!="":
                 self.data_path.signal_tick()
                 self.data_path.a_interruption()
                 self.data_path.to_stack(arg)
@@ -299,7 +296,7 @@ class ControlUnit:
                 self.data_path.in_alu("out", left_sel="stack", right_sel="stack")
                 self.data_path.signal_tick()
                 self.data_path.a_interruption()
-            except:
+            else:
                 self.data_path.to_stack(2)
                 self.data_path.signal_tick()
                 self.data_path.a_interruption()

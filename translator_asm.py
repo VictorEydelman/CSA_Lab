@@ -23,7 +23,7 @@ def translate_stage(text):
             code.append({"index": len(code) + 4, "opcode": opcode, "arg": arg, "term": Term(num, 0, token)})
         else:
             opcode = Opcode(token)
-            code.append({"index": len(code) + 4, "opcode": opcode, "term": Term(num, 0, token)})
+            code.append({"index": len(code) + 4, "opcode": opcode, "arg": "", "term": Term(num, 0, token)})
 
     return labels, code
 
