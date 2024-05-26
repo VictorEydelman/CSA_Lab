@@ -34,10 +34,9 @@ out_code: |-
   {"index": 17, "opcode": "store", "arg": 4, "term": [14, 0, "store hello_world"]},
   {"index": 18, "opcode": "halt", "arg": "", "term": [15, 0, "halt"]}]
 out_stdout: |-
-  Hello World                                                            
+  Hello World                                                      
   2
   26
-
 out_log: |-
   DEBUG:root:PC:  15 MEM_OUT: {'opcode': 'word', 'arg': '100'}    word 100
   DEBUG:root:PC:  16 MEM_OUT: {'opcode': 'nop', 'arg': 0}         nop 0  
