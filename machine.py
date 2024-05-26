@@ -20,7 +20,8 @@ class DataPath:
 
     def __init__(self, memory_size, input_token, input_address):
         self.alu = 0
-        self.memory = [{"opcode": Opcode.NOP.value, "arg": ""}] * memory_size
+        self.memory = [{"opcode": Opcode.NOP.value, "arg": 0}] * memory_size
+        self.memory[0],self.memory[2]={"opcode": Opcode.NOP.value, "arg": ""},{"opcode": Opcode.NOP.value, "arg": ""}
         self.input_token = input_token
         self.input_address = input_address
         self.ir = {"opcode": Opcode.NOP.value}
