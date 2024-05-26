@@ -1,11 +1,13 @@
 in_source: |-
   _start:
+      push 0
+  loop:
       ei
       load_symbol
       push 10
       sub
       jz print
-      jmp _start
+      jmp loop
   print:
       load
       store
