@@ -9,7 +9,7 @@ import pytest
 import translator_asm
 
 
-@pytest.mark.golden_test("golden/*_asm.yml")
+@pytest.mark.golden_test("golden/cat_asm.yml")
 def test_translator_asm_and_machine(golden, caplog):
     """Почти полная копия test_translator_and_machine из golden_bf_test. Детали
     см. там."""
@@ -32,6 +32,6 @@ def test_translator_asm_and_machine(golden, caplog):
         with open(target, encoding="utf-8") as file:
             code = file.read()
 
-        #assert code == golden.out["out_code"]
-        #assert stdout.getvalue() == golden.out["out_stdout"]
-        #assert caplog.text == golden.out["out_log"]
+        assert code == golden.out["out_code"]
+        assert stdout.getvalue() == golden.out["out_stdout"]
+        assert caplog.text == golden.out["out_log"]
