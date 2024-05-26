@@ -17,3 +17,8 @@ in_source: |
       halt
 in_stdin: |-
   [(1,'c'),(1,'a'),(3,'t'),(4,'\n')]
+out_code: |-
+
+out_stdout: |-
+
+out_log: |-
