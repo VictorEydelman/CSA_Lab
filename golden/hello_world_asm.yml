@@ -16,9 +16,29 @@ in_source: |-
       store hello_world
       halt
 in_stdin: |-
-  [(1,'c'),(1,'a'),(3,'t'),(4,'\n')]
+
 out_code: |-
-
+  [{"_start": 15},
+  {"index": 4, "opcode": "resw", "arg": "11", "term": [1, 0, "resw 11"]},
+  {"index": 5, "opcode": "word", "arg": "72", "term": [2, 0, "word 72"]},
+  {"index": 6, "opcode": "word", "arg": "101", "term": [3, 0, "word 101"]},
+  {"index": 7, "opcode": "word", "arg": "108", "term": [4, 0, "word 108"]},
+  {"index": 8, "opcode": "word", "arg": "108", "term": [5, 0, "word 108"]},
+  {"index": 9, "opcode": "word", "arg": "111", "term": [6, 0, "word 111"]},
+  {"index": 10, "opcode": "word", "arg": "32", "term": [7, 0, "word 32"]},
+  {"index": 11, "opcode": "word", "arg": "87", "term": [8, 0, "word 87"]},
+  {"index": 12, "opcode": "word", "arg": "111", "term": [9, 0, "word 111"]},
+  {"index": 13, "opcode": "word", "arg": "114", "term": [10, 0, "word 114"]},
+  {"index": 14, "opcode": "word", "arg": "108", "term": [11, 0, "word 108"]},
+  {"index": 15, "opcode": "word", "arg": "100", "term": [12, 0, "word 100"]},
+  {"index": 17, "opcode": "store", "arg": 4, "term": [14, 0, "store hello_world"]},
+  {"index": 18, "opcode": "halt", "term": [15, 0, "halt"]}]
 out_stdout: |-
-
+  Hello World                                                            
+  2
+  34
 out_log: |-
+  DEBUG:root:PC:  15 MEM_OUT: {'opcode': 'word', 'arg': '100'}    word 100
+  DEBUG:root:PC:  16 MEM_OUT: {'opcode': 'nop', 'arg': 0}         nop 0  
+  DEBUG:root:PC:  17 MEM_OUT: {'opcode': 'store', 'arg': 4}       store 4
+  INFO:root:output_buffer: 'Hello World'
