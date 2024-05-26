@@ -32,4 +32,4 @@ def test_translator_asm_and_machine(golden, caplog):
 
         assert code == golden.out["out_code"]
         assert stdout.getvalue()[:-1] == golden.out["out_stdout"]
-        assert caplog.text == golden.out["out_log"]
+        assert caplog.text[:-1] == golden.out["out_log"]
