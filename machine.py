@@ -110,8 +110,15 @@ class DataPath:
             left = self.stack_data.pop()
         if right_sel is not None:
             right = self.stack_data.pop()
-        if operation == "inc" or operation == "dec" or operation == "mul" or operation == "div" or operation == "swap"\
-                or operation == "add" or operation == "sub":
+        if (
+            operation == "inc"
+            or operation == "dec"
+            or operation == "mul"
+            or operation == "div"
+            or operation == "swap"
+            or operation == "add"
+            or operation == "sub"
+        ):
             self.operation_in_alu(operation, left, right)
         elif operation == "out":
             i = 0
@@ -283,8 +290,13 @@ class ControlUnit:
         self.pc += 1
         ir = self.data_path.memory[self.pc]
         opcode = ir["opcode"]
-        if opcode == Opcode.JMP or opcode == Opcode.JZ or opcode == Opcode.JNZ or opcode == Opcode.JN\
-                or opcode == Opcode.JNS:
+        if (
+            opcode == Opcode.JMP
+            or opcode == Opcode.JZ
+            or opcode == Opcode.JNZ
+            or opcode == Opcode.JN
+            or opcode == Opcode.JNS
+        ):
             self.branching(opcode, ir["arg"])
         elif opcode == Opcode.HALT:
             return "halt"
@@ -353,11 +365,11 @@ def simulation(code, input_token, input_address, memory, limit):
 def main(program_file, input_file):
     code = read_code(program_file)
     with open(input_file, encoding="utf-8") as file:
-        target = file.read()
+        tar = file.read()
         input_token = []
         input_address = []
-        if target != "":
-            t = eval(target)
+        if tar != "":
+            t = eval(tar)
             for num, char in t:
                 input_address.append(num)
                 input_token.append(char)
