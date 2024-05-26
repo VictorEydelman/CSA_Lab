@@ -54,6 +54,7 @@ class DataPath:
     def s(self, code: list):
         for mem in code:
             self.memory[mem["index"]] = {"opcode": mem["opcode"], "arg": mem["arg"]}
+
     def flag(self):
         if not isinstance(self.alu, str):
             if self.alu == 0:
@@ -138,7 +139,7 @@ class ControlUnit:
 
     def __init__(self, code, data_path):
         self.data_path = data_path
-        self.pc = int(code[0]["_start"])+1
+        self.pc = int(code[0]["_start"]) + 1
         del code[0]
         data_path.s(code)
         self.code = code
@@ -281,7 +282,7 @@ class ControlUnit:
             self.data_path.a_interruption()
         elif opcode == Opcode.STORE:
             arg = ir["arg"]
-            if arg!="":
+            if arg != "":
                 self.data_path.signal_tick()
                 self.data_path.a_interruption()
                 self.data_path.to_stack(arg)
@@ -333,7 +334,7 @@ def simulation(code, input_token, input_address, memory, limit):
         logging.debug("%s", control_unit)
 
     logging.info("output_buffer: %s", repr("".join(str(data_path.memory[2]["arg"]))))
-    return "".join(str(data_path.memory[2]["arg"])), i+1, data_path.tick
+    return "".join(str(data_path.memory[2]["arg"])), i + 1, data_path.tick
 
 
 def main(sourse, target):
@@ -352,6 +353,7 @@ def main(sourse, target):
     print("".join(output))
     print(instr)
     print(tick)
+
 
 if __name__ == "__main__":
     logging.getLogger().setLevel(logging.DEBUG)

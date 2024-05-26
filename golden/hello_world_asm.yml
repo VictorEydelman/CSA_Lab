@@ -38,5 +38,5 @@ out_stdout: |-
   2
   26
 out_log: |-
-  DEBUG   machine:simulation    PC:  17 MEM_OUT: {'opcode': 'store', 'arg': 4} store 4
+  DEBUG   machine:simulation    PC:  17 MEM_OUT: {'opcode': 'store', 'arg': 4}    store 4
   INFO    machine:simulation    output_buffer: 'Hello World'
