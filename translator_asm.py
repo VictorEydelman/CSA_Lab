@@ -40,6 +40,7 @@ def translate(text):
     labels, code = translate_stage(text)
     return translate_stage2(labels, code)
 
+
 def main(source, target):
     with open(source, encoding="utf-8") as f:
         source = f.read()

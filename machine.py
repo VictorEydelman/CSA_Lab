@@ -65,14 +65,15 @@ class DataPath:
             else:
                 self.N = 0
 
-    def inc_dec(self,operation,left):
+    def inc_dec(self, operation, left):
         if operation == "inc":
             self.alu = int(left) + 1
         elif operation == "dec":
             self.alu = int(left) - 1
+
     def operation_in_alu(self, operation, left, right):
-        if operation==("inc" or "dec"):
-            self.inc_dec(operation,left)
+        if operation == ("inc" or "dec"):
+            self.inc_dec(operation, left)
         elif operation == "add":
             self.alu = int(left) + int(right)
         elif operation == "sub":
@@ -124,7 +125,7 @@ class DataPath:
                 self.a_interruption()
                 i += 1
         else:
-            self.in_alu_with_memory(operation,left,right)
+            self.in_alu_with_memory(operation, left, right)
         self.flag()
 
     def signal_stack(self):
@@ -148,7 +149,7 @@ class ControlUnit:
         data_path.s(code)
         self.code = code
 
-    def operation(self,opcode):
+    def operation(self, opcode):
         if opcode == Opcode.INC:
             self.data_path.in_alu("inc", left_sel="stack")
             self.data_path.signal_stack()
@@ -180,7 +181,7 @@ class ControlUnit:
             self.data_path.signal_tick()
             self.data_path.a_interruption()
 
-    def without_arg(self,opcode):
+    def without_arg(self, opcode):
         if opcode == Opcode.RET:
             self.pc = self.stack_return.pop()
             self.data_path.signal_tick()
@@ -215,7 +216,7 @@ class ControlUnit:
         else:
             self.operation(opcode)
 
-    def branching(self,opcode,arg):
+    def branching(self, opcode, arg):
         if opcode == Opcode.JMP:
             self.pc = arg - 1
             self.data_path.signal_tick()
@@ -236,7 +237,8 @@ class ControlUnit:
             self.pc = arg - 1
             self.data_path.signal_tick()
             self.data_path.a_interruption()
-    def push_pop_stack(self,opcode,arg):
+
+    def push_pop_stack(self, opcode, arg):
         if opcode == Opcode.PUSH_ADDR:
             self.data_path.signal_tick()
             self.data_path.a_interruption()
@@ -266,12 +268,13 @@ class ControlUnit:
             self.data_path.stack_data.pop()
             self.data_path.signal_tick()
             self.data_path.a_interruption()
+
     def d(self):
         self.pc += 1
         ir = self.data_path.memory[self.pc]
         opcode = ir["opcode"]
         if opcode == (Opcode.JMP or Opcode.JZ or Opcode.JNZ or Opcode.JN or Opcode.JNS):
-            self.branching(opcode,ir["arg"])
+            self.branching(opcode, ir["arg"])
         elif opcode == Opcode.HALT:
             return "halt"
         elif opcode == (Opcode.PUSH or Opcode.PUSH_ADDR or Opcode.POP or Opcode.POP_ADDR):
@@ -325,7 +328,7 @@ class ControlUnit:
 def simulation(code, input_token, input_address, memory, limit):
     data_path = DataPath(memory, input_token, input_address)
     control_unit = ControlUnit(code, data_path)
-
+    i = 0
     for i in range(limit):
         rez = control_unit.d()
         if rez == "halt":
