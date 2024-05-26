@@ -36,7 +36,7 @@ out_code: |-
 out_stdout: |-
   Hello World                                                            
   2
-  26\n
+  26 \n
 out_log: |-
   DEBUG:root:PC:  15 MEM_OUT: {'opcode': 'word', 'arg': '100'}    word 100
   DEBUG:root:PC:  16 MEM_OUT: {'opcode': 'nop', 'arg': 0}         nop 0  
