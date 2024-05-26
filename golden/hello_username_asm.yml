@@ -59,7 +59,78 @@ in_source: |-
 in_stdin: |-
   [(1,'c'),(1,'a'),(3,'t'),(4,'\n')]
 out_code: |-
-
+  [{"_start": 38},
+  {"index": 4, "opcode": "resw", "arg": "2", "term": [1, 0, "resw 2"]},
+  {"index": 5, "opcode": "word", "arg": "60", "term": [2, 0, "word 60"]},
+  {"index": 6, "opcode": "word", "arg": "32", "term": [3, 0, "word 32"]},
+  {"index": 7, "opcode": "resw", "arg": "2", "term": [5, 0, "resw 2"]},
+  {"index": 8, "opcode": "word", "arg": "62", "term": [6, 0, "word 62"]},
+  {"index": 9, "opcode": "word", "arg": "32", "term": [7, 0, "word 32"]},
+  {"index": 10, "opcode": "resw", "arg": "21", "term": [9, 0, "resw 21"]},
+  {"index": 11, "opcode": "word", "arg": "87", "term": [10, 0, "word 87"]},
+  {"index": 12, "opcode": "word", "arg": "104", "term": [11, 0, "word 104"]},
+  {"index": 13, "opcode": "word", "arg": "97", "term": [12, 0, "word 97"]},
+  {"index": 14, "opcode": "word", "arg": "116", "term": [13, 0, "word 116"]},
+  {"index": 15, "opcode": "word", "arg": "32", "term": [14, 0, "word 32"]},
+  {"index": 16, "opcode": "word", "arg": "105", "term": [15, 0, "word 105"]},
+  {"index": 17, "opcode": "word", "arg": "115", "term": [16, 0, "word 115"]},
+  {"index": 18, "opcode": "word", "arg": "32", "term": [17, 0, "word 32"]},
+  {"index": 19, "opcode": "word", "arg": "121", "term": [18, 0, "word 121"]},
+  {"index": 20, "opcode": "word", "arg": "111", "term": [19, 0, "word 111"]},
+  {"index": 21, "opcode": "word", "arg": "117", "term": [20, 0, "word 117"]},
+  {"index": 22, "opcode": "word", "arg": "114", "term": [21, 0, "word 114"]},
+  {"index": 23, "opcode": "word", "arg": "32", "term": [22, 0, "word 32"]},
+  {"index": 24, "opcode": "word", "arg": "110", "term": [23, 0, "word 110"]},
+  {"index": 25, "opcode": "word", "arg": "97", "term": [24, 0, "word 97"]},
+  {"index": 26, "opcode": "word", "arg": "109", "term": [25, 0, "word 109"]},
+  {"index": 27, "opcode": "word", "arg": "101", "term": [26, 0, "word 101"]},
+  {"index": 28, "opcode": "word", "arg": "63", "term": [27, 0, "word 63"]},
+  {"index": 29, "opcode": "word", "arg": "10", "term": [28, 0, "word 10"]},
+  {"index": 30, "opcode": "word", "arg": "0", "term": [29, 0, "word 0"]},
+  {"index": 31, "opcode": "resw", "arg": "7", "term": [31, 0, "resw 7"]},
+  {"index": 32, "opcode": "word", "arg": "72", "term": [32, 0, "word 72"]},
+  {"index": 33, "opcode": "word", "arg": "101", "term": [33, 0, "word 101"]},
+  {"index": 34, "opcode": "word", "arg": "108", "term": [34, 0, "word 108"]},
+  {"index": 35, "opcode": "word", "arg": "108", "term": [35, 0, "word 108"]},
+  {"index": 36, "opcode": "word", "arg": "111", "term": [36, 0, "word 111"]},
+  {"index": 37, "opcode": "word", "arg": "44", "term": [37, 0, "word 44"]},
+  {"index": 38, "opcode": "word", "arg": "32", "term": [38, 0, "word 32"]},
+  {"index": 40, "opcode": "ei", "arg": "", "term": [40, 0, "ei"]},
+  {"index": 41, "opcode": "load_symbol", "arg": "", "term": [41, 0, "load_symbol"]},
+  {"index": 42, "opcode": "push", "arg": "10", "term": [42, 0, "push 10"]},
+  {"index": 43, "opcode": "sub", "arg": "", "term": [43, 0, "sub"]},
+  {"index": 44, "opcode": "jz", "arg": 46, "term": [44, 0, "jz print"]},
+  {"index": 45, "opcode": "jmp", "arg": 39, "term": [45, 0, "jmp _start"]},
+  {"index": 46, "opcode": "store", "arg": 7, "term": [47, 0, "store sym_out"]},
+  {"index": 47, "opcode": "store", "arg": 10, "term": [48, 0, "store what"]},
+  {"index": 48, "opcode": "store", "arg": 4, "term": [49, 0, "store sym_in"]},
+  {"index": 49, "opcode": "load", "arg": "", "term": [50, 0, "load"]},
+  {"index": 50, "opcode": "store", "arg": "", "term": [51, 0, "store"]},
+  {"index": 51, "opcode": "store", "arg": 7, "term": [52, 0, "store sym_out"]},
+  {"index": 52, "opcode": "store", "arg": 31, "term": [53, 0, "store hello"]},
+  {"index": 53, "opcode": "load", "arg": "", "term": [54, 0, "load"]},
+  {"index": 54, "opcode": "store", "arg": "", "term": [55, 0, "store"]},
+  {"index": 55, "opcode": "halt", "arg": "", "term": [56, 0, "halt"]}]
 out_stdout: |-
-
+  > What is your name?
+  < cat
+  > Hello, cat
+  
+  15
+  112
 out_log: |-
+  DEBUG   machine:simulation    PC: 40 MEM_OUT: {'opcode': 'ei', 'arg': ''} ei 
+  DEBUG   machine:simulation    PC: 41 MEM_OUT: {'opcode': 'load_symbol', 'arg': ''} load_symbol 
+  DEBUG   machine:simulation    PC: 42 MEM_OUT: {'opcode': 'push', 'arg': '10'} push 10
+  DEBUG   machine:simulation    PC: 43 MEM_OUT: {'opcode': 'sub', 'arg': ''} sub 
+  DEBUG   machine:simulation    PC: 45 MEM_OUT: {'opcode': 'jmp', 'arg': 39} jmp 39
+  DEBUG   machine:simulation    PC: 46 MEM_OUT: {'opcode': 'store', 'arg': 7} store 7
+  DEBUG   machine:simulation    PC: 47 MEM_OUT: {'opcode': 'store', 'arg': 10} store 10
+  DEBUG   machine:simulation    PC: 48 MEM_OUT: {'opcode': 'store', 'arg': 4} store 4
+  DEBUG   machine:simulation    PC: 49 MEM_OUT: {'opcode': 'load', 'arg': ''} load
+  DEBUG   machine:simulation    PC: 50 MEM_OUT: {'opcode': 'store', 'arg': ''} store
+  DEBUG   machine:simulation    PC: 51 MEM_OUT: {'opcode': 'store', 'arg': 7} store 7
+  DEBUG   machine:simulation    PC: 52 MEM_OUT: {'opcode': 'store', 'arg': 31} store 31
+  DEBUG   machine:simulation    PC: 53 MEM_OUT: {'opcode': 'load', 'arg': ''} load
+  DEBUG   machine:simulation    PC: 54 MEM_OUT: {'opcode': 'store', 'arg': ''} store
+  INFO    machine:simulation    output_buffer: '> What is your name?\n\x00< cat\n> Hello, cat\n'

@@ -1,5 +1,4 @@
-in_source: |-
-    num:
+num:
         push_addr 101
         push 2
         div
@@ -44,10 +43,3 @@ in_source: |-
         push_addr 102
         store
         halt
-in_stdin: |-
-
-out_code: |-
-
-out_stdout: |-
-
-out_log: |-

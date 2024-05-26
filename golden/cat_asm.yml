@@ -14,7 +14,30 @@ in_source: |-
 in_stdin: |-
   [(1,'c'),(1,'a'),(3,'t'),(4,'\n')]
 out_code: |-
+  cat
 
+  8
+  21
 out_stdout: |-
-
+  [{"_start": 3},
+  {"index": 5, "opcode": "ei", "arg": "", "term": [1, 0, "ei"]},
+  {"index": 6, "opcode": "load_symbol", "arg": "", "term": [2, 0, "load_symbol"]},
+  {"index": 7, "opcode": "push", "arg": "10", "term": [3, 0, "push 10"]},
+  {"index": 8, "opcode": "sub", "arg": "", "term": [4, 0, "sub"]},
+  {"index": 9, "opcode": "jz", "arg": 11, "term": [5, 0, "jz print"]},
+  {"index": 10, "opcode": "jmp", "arg": 4, "term": [6, 0, "jmp _start"]},
+  {"index": 11, "opcode": "load", "arg": "", "term": [8, 0, "load"]},
+  {"index": 12, "opcode": "store", "arg": "", "term": [9, 0, "store"]},
+  {"index": 13, "opcode": "halt", "arg": "", "term": [10, 0, "halt"]}]
 out_log: |-
+  DEBUG   machine:simulation    PC: 5 MEM_OUT: {'opcode': 'ei', 'arg': ''} ei 
+  DEBUG   machine:simulation    PC: 6 MEM_OUT: {'opcode': 'load_symbol', 'arg': ''} load_symbol 
+  DEBUG   machine:simulation    PC: 8 MEM_OUT: {'opcode': 'sub', 'arg': ''} sub
+  DEBUG   machine:simulation    PC: 10 MEM_OUT: {'opcode': 'jmp', 'arg': 4} jmp 4
+  DEBUG   machine:simulation    PC: 11 MEM_OUT: {'opcode': 'load', 'arg': ''} load
+  DEBUG   machine:simulation    PC: 7 MEM_OUT: {'opcode': 'push', 'arg': '10'} push 10
+  DEBUG   machine:simulation    PC: 8 MEM_OUT: {'opcode': 'sub', 'arg': ''} sub
+  DEBUG   machine:simulation    PC: 10 MEM_OUT: {'opcode': 'jmp', 'arg': 4} jmp 4
+  DEBUG   machine:simulation    PC: 11 MEM_OUT: {'opcode': 'load', 'arg': ''} load
+  DEBUG   machine:simulation    PC: 12 MEM_OUT: {'opcode': 'store', 'arg': ''} store
+  INFO    machine:simulation    output_buffer: 'cat\n'

@@ -72,7 +72,7 @@ class DataPath:
             self.alu = int(left) - 1
 
     def operation_in_alu(self, operation, left, right):
-        if operation == ("inc" or "dec"):
+        if operation == "inc" or operation == "dec":
             self.inc_dec(operation, left)
         elif operation == "add":
             self.alu = int(left) + int(right)
@@ -83,10 +83,10 @@ class DataPath:
         elif operation == "div":
             self.alu = int(right) // int(left)
         elif operation == "swap":
-            self.stack_data.append(left)
+            self.stack_data.append(right)
             self.signal_tick()
             self.a_interruption()
-            self.stack_data.append(right)
+            self.stack_data.append(left)
             self.alu = right
 
     def in_alu_with_memory(self, operation, left, right):
@@ -110,7 +110,7 @@ class DataPath:
             left = self.stack_data.pop()
         if right_sel is not None:
             right = self.stack_data.pop()
-        if operation == ("inc" or "dec" or "mul" or "div" or "swap" or "add" or "sub"):
+        if operation == "inc" or operation == "dec" or operation == "mul" or operation == "div" or operation == "swap" or operation == "add" or operation == "sub":
             self.operation_in_alu(operation, left, right)
         elif operation == "out":
             i = 0
@@ -177,6 +177,11 @@ class ControlUnit:
             self.data_path.a_interruption()
         elif opcode == Opcode.DIV:
             self.data_path.in_alu("div", left_sel="stack", right_sel="stack")
+            self.data_path.signal_stack()
+            self.data_path.signal_tick()
+            self.data_path.a_interruption()
+        elif opcode == Opcode.SWAP:
+            self.data_path.in_alu("swap", left_sel="stack", right_sel="stack")
             self.data_path.signal_stack()
             self.data_path.signal_tick()
             self.data_path.a_interruption()
@@ -273,11 +278,11 @@ class ControlUnit:
         self.pc += 1
         ir = self.data_path.memory[self.pc]
         opcode = ir["opcode"]
-        if opcode == (Opcode.JMP or Opcode.JZ or Opcode.JNZ or Opcode.JN or Opcode.JNS):
+        if opcode == Opcode.JMP or opcode == Opcode.JZ or opcode == Opcode.JNZ or opcode == Opcode.JN or opcode == Opcode.JNS:
             self.branching(opcode, ir["arg"])
         elif opcode == Opcode.HALT:
             return "halt"
-        elif opcode == (Opcode.PUSH or Opcode.PUSH_ADDR or Opcode.POP or Opcode.POP_ADDR):
+        elif opcode == Opcode.PUSH or opcode == Opcode.PUSH_ADDR or opcode == Opcode.POP or opcode == Opcode.POP_ADDR:
             self.push_pop_stack(opcode, ir["arg"])
         elif opcode == Opcode.CALL:
             arg = ir["arg"]
