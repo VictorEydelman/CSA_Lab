@@ -358,6 +358,7 @@ def main(sourse, target):
 
 if __name__ == "__main__":
     logging.getLogger().setLevel(logging.DEBUG)
+    logging.basicConfig(format="%(levelname)-7s %(module)s:%(funcName)-13s %(message)s")
     assert len(sys.argv) == 3, "Wrong arguments: machine.py <input_file> <target_file>"
     _, sourse, target = sys.argv
     main(sourse, target)

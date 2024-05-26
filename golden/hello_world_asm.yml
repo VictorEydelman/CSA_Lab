@@ -38,7 +38,7 @@ out_stdout: |-
   2
   26
 out_log: |-
-  DEBUG:root:PC:  15 MEM_OUT: {'opcode': 'word', 'arg': '100'}    word 100
-  DEBUG:root:PC:  16 MEM_OUT: {'opcode': 'nop', 'arg': 0}         nop 0  
-  DEBUG:root:PC:  17 MEM_OUT: {'opcode': 'store', 'arg': 4}       store 4
-  INFO:root:output_buffer: 'Hello World'
+  DEBUG   machine:simulation    PC:  15 MEM_OUT: {'opcode': 'word', 'arg': '100'}         word 100
+  DEBUG   machine:simulation    PC:  16 MEM_OUT: {'opcode': 'nop', 'arg': 0}      nop 0
+  DEBUG   machine:simulation    PC:  17 MEM_OUT: {'opcode': 'store', 'arg': 4}    store 4
+  INFO    machine:simulation    output_buffer: 'Hello World'
