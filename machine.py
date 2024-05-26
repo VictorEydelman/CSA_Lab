@@ -325,7 +325,7 @@ class ControlUnit:
 def simulation(code, input_token, input_address, memory, limit):
     data_path = DataPath(memory, input_token, input_address)
     control_unit = ControlUnit(code, data_path)
-    i = 0
+    i = 1
 
     for i in range(limit):
         rez = control_unit.d()
