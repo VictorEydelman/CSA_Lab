@@ -26,7 +26,6 @@ def test_translator_asm_and_machine(golden, caplog):
 
         with contextlib.redirect_stdout(io.StringIO()) as stdout:
             translator_asm.main(source, target)
-            print("============================================================")
             machine.main(target, input_stream)
 
         with open(target, encoding="utf-8") as file:
