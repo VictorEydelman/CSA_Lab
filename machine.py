@@ -89,6 +89,7 @@ class DataPath:
             self.stack_data.append(left)
             self.alu = right
 
+
     def in_alu_with_memory(self, operation, left, right):
         if operation == "from_memory":
             self.alu = self.memory[int(left)]["arg"]
@@ -109,6 +110,7 @@ class DataPath:
         if left_sel is not None:
             left = self.stack_data.pop()
         if right_sel is not None:
+            self.signal_tick()
             right = self.stack_data.pop()
         if (
             operation == "inc"
@@ -120,7 +122,7 @@ class DataPath:
             or operation == "sub"
         ):
             self.operation_in_alu(operation, left, right)
-        elif operation == "out":
+        elif operation == "store":
             i = 0
             symbol = 1
             while int(right) > i and symbol != 0 and self.memory[left + i]["opcode"] == Opcode.WORD:
@@ -141,6 +143,15 @@ class DataPath:
 
     def to_stack(self, arg):
         self.stack_data.append(arg)
+
+    def signal_pop(self):
+        self.stack_data.pop()
+
+    def signal_interruption_EI(self):
+        self.interruption=True
+
+    def signal_interruption_DI(self):
+        self.interruption=False
 
 
 class ControlUnit:
@@ -204,11 +215,11 @@ class ControlUnit:
             self.data_path.signal_tick()
             self.data_path.a_interruption()
         elif opcode == Opcode.EI:
-            self.data_path.interruption = True
+            self.data_path.signal_interruption_EI()
             self.data_path.signal_tick()
             self.data_path.a_interruption()
         elif opcode == Opcode.DI:
-            self.data_path.interruption = False
+            self.data_path.signal_interruption_DI()
             self.data_path.signal_tick()
         elif opcode == Opcode.LOAD:
             self.data_path.signal_tick()
@@ -282,11 +293,11 @@ class ControlUnit:
             self.data_path.signal_tick()
             self.data_path.a_interruption()
         elif opcode == Opcode.POP:
-            self.data_path.stack_data.pop()
+            self.data_path.signal_pop()
             self.data_path.signal_tick()
             self.data_path.a_interruption()
 
-    def d(self):
+    def instruction_decoder(self):
         self.pc += 1
         ir = self.data_path.memory[self.pc]
         opcode = ir["opcode"]
@@ -313,8 +324,6 @@ class ControlUnit:
         elif opcode == Opcode.STORE:
             arg = ir["arg"]
             if arg != "":
-                self.data_path.signal_tick()
-                self.data_path.a_interruption()
                 self.data_path.to_stack(arg)
                 self.data_path.in_alu("from_memory", left_sel="stack")
                 self.data_path.signal_tick()
@@ -323,7 +332,7 @@ class ControlUnit:
                 self.data_path.to_stack(arg + 1)
                 self.data_path.signal_tick()
                 self.data_path.a_interruption()
-                self.data_path.in_alu("out", left_sel="stack", right_sel="stack")
+                self.data_path.in_alu("store", left_sel="stack", right_sel="stack")
                 self.data_path.signal_tick()
                 self.data_path.a_interruption()
             else:
@@ -353,7 +362,7 @@ def simulation(code, input_token, input_address, memory, limit):
     control_unit = ControlUnit(code, data_path)
     i = 0
     for i in range(limit):
-        rez = control_unit.d()
+        rez = control_unit.instruction_decoder()
         if rez == "halt":
             break
         logging.debug("%s", control_unit)

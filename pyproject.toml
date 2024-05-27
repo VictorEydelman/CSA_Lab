@@ -2,7 +2,7 @@
 name = "CSA_Lab3"
 version = "0.1.0"
 description = "Stack machine realization"
-authors = ["edshPC <ed_shh@mail.ru>"]
+authors = ["Viktor <Viktor@mail.ru>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
