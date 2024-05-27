@@ -185,7 +185,7 @@ halt|0|остановить процессор
 Интерфейс командной строки: ```machine.py <machine_code_file> <input_file>
 Реализовано в модуле: machine.
 # DataPath
-![image](https://github.com/VictorEydelman/CSA-Lab3/assets/113546427/66ad8a99-a32f-4527-99d3-2eafa23f69dd)
+![image](https://github.com/VictorEydelman/CSA-Lab3/assets/113546427/eaf3e2f0-0307-4186-a985-f1474202f093)
 <a id="DataPath"></a>
 Реализован в классе ```DataPath```.
 
@@ -214,7 +214,7 @@ halt|0|остановить процессор
 ```interruption controller``` - позволяет принимать данные при прерывания. Передаёт принятые данные в конец значения ячейки памяти 0, где хранится input_buffer, и в ячейку 1, где находится input_last_symbol.
 
 # ControlUnit
-![image](https://github.com/VictorEydelman/CSA-Lab3/assets/113546427/8083a1ff-fef2-4f47-ab3b-9975e2a2c927)
+![image](https://github.com/VictorEydelman/CSA-Lab3/assets/113546427/71cabec9-032c-4549-a8e0-800150d03e52)
 
 Реализован в классе ```Contorl unit```.
 ```DataPath``` - [DataPath](#DataPath)
