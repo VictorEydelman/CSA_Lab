@@ -315,10 +315,17 @@ halt | 0 | остановить процессор
 Тестирование выполняется при помощи golden test-ов.
 Тесты реализованы в: golden_test.py.
 
+### Тесты:
+
+* hello_world_asm.asm - [hello_world_asm.yml](./golden/hello_world_asm.yml)
+* hello_username_asm.asm - [hello_username_asm.yml](./golden/hello_username_asm.yml)
+* cat_asm.asm - [cat_asm.yml](./golden/cat_asm.yml)
+* prob2_asm.asm - [prob2_asm.yml](./golden/prob2_asm.yml)
+
 Запустить тесты: ```poetry run pytest . -v```
 Обновить конфигурацию golden tests: ```poetry run pytest . -v --update-goldens```
 
-CI при помощи Github Action:
+### CI при помощи Github Action:
 
 ```text
 name: Python CI
@@ -379,7 +386,7 @@ jobs:
         run: poetry run ruff check .
 ```
 
-Пример использования и журнала работы процессора на примере ```cat```:
+### Пример использования и журнала работы процессора на примере ```cat```:
 
 ```shell
 (Lab) PS C:\Users\veyde\OneDrive\Документы\Работы ИТМО\АК\Лаба3> cat .\target.json
@@ -435,7 +442,7 @@ instr_counter: 16
 ticks: 36
 ```
 
-Пример проверки исходного кода:
+### Пример проверки исходного кода:
 
 ```shell
 Run poetry run coverage run -m pytest . -v
