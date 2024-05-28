@@ -39,16 +39,22 @@ class DataPath:
         self.tick += 1
 
     def interruption_controller(self):
-        num = self.tick
-        while num <= self.tick:
-            while num in self.input_address and self.interruption:
-                a = self.input_token[self.input_address.index(num)]
+        if self.input_address:
+            if self.tick in self.input_address and self.interruption and self.tick <= max(self.input_address):
+                a = self.input_token[self.input_address.index(self.tick)]
+                self.input_address[self.input_address.index(self.tick)] = 0
                 self.memory[0] = {"opcode": self.memory[0]["opcode"], "arg": self.memory[0]["arg"] + a}
                 self.signal_tick()
-                self.memory[1] = {"opcode": self.memory[0]["opcode"], "arg": ord(a) % (2**32)}
-                self.input_address[self.input_address.index(num)] = 0
+                self.memory[1] = {"opcode": self.memory[0]["opcode"], "arg": ord(a) % (2 ** 32)}
+                print(self.input_address, self.tick)
                 self.signal_tick()
-            num += 1
+                self.interruption_controller()
+            elif self.tick > max(self.input_address) > 0:
+                self.input_address = [0]
+                self.memory[0] = {"opcode": self.memory[0]["opcode"], "arg": self.memory[0]["arg"] + "\n"}
+                self.signal_tick()
+                self.memory[1] = {"opcode": self.memory[0]["opcode"], "arg": ord("\n") % (2 ** 32)}
+                self.signal_tick()
 
     def instructions_in_memory(self, code: list):
         for mem in code:
