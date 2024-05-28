@@ -11,7 +11,7 @@ in_source: |-
       store
       halt
 in_stdin: |-
-  [(1,'c'),(1,'a'),(3,'t'),(4,'\n')]
+  [(1,'V'),(5,'i'),(7,'k'),(14,'o'),(15,'r')]
 out_code: |-
   [{"_start": 3},
   {"index": 5, "opcode": "ei", "arg": ""},
