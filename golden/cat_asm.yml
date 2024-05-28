@@ -14,11 +14,6 @@ in_source: |-
 in_stdin: |-
   [(1,'c'),(1,'a'),(3,'t'),(4,'\n')]
 out_code: |-
-  Vikor
-  
-  instr_counter: 16
-  ticks: 36
-out_stdout: |-
   [{"_start": 3},
   {"index": 5, "opcode": "ei", "arg": ""},
   {"index": 6, "opcode": "load_symbol", "arg": ""},
@@ -29,6 +24,12 @@ out_stdout: |-
   {"index": 11, "opcode": "load", "arg": ""},
   {"index": 12, "opcode": "store", "arg": ""},
   {"index": 13, "opcode": "halt", "arg": ""}]
+
+out_stdout: |-
+  Vikor
+
+  instr_counter: 16
+  ticks: 36
 out_log: |-
   DEBUG   machine:simulation    PC: 5 ticks: 0 MEM_OUT: {'opcode': 'ei', 'arg': ''} ei
   DEBUG   machine:simulation    PC: 6 ticks: 3 MEM_OUT: {'opcode': 'load_symbol', 'arg': ''} load_symbol
