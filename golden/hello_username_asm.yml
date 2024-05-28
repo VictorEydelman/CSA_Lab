@@ -117,8 +117,8 @@ out_stdout: |-
   instr_counter: 23
   ticks: 116
 out_log: |-
-  DEBUG   machine:simulation    PC: 39 ticks: 0 MEM_OUT: {'opcode': 'ei', 'arg': ''} ei 
-  DEBUG   machine:simulation    PC: 40 ticks: 3 MEM_OUT: {'opcode': 'load_symbol', 'arg': ''} load_symbol 
+  DEBUG   machine:simulation    PC: 39 ticks: 0 MEM_OUT: {'opcode': 'ei', 'arg': ''} ei
+  DEBUG   machine:simulation    PC: 40 ticks: 3 MEM_OUT: {'opcode': 'load_symbol', 'arg': ''} load_symbol
   DEBUG   machine:simulation    PC: 41 ticks: 10 MEM_OUT: {'opcode': 'push', 'arg': '10'} push 10
   DEBUG   machine:simulation    PC: 42 ticks: 12 MEM_OUT: {'opcode': 'sub', 'arg': ''} sub
   DEBUG   machine:simulation    PC: 43 ticks: 20 MEM_OUT: {'opcode': 'jz', 'arg': 45} jz 45

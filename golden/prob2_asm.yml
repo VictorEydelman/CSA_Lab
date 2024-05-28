@@ -93,19 +93,19 @@ out_stdout: |-
     ticks: 1547
 out_log: |-
     DEBUG   machine:simulation    PC: 21 ticks: 0 MEM_OUT: {'opcode': 'push', 'arg': '2'} push 2
-    DEBUG   machine:simulation    PC: 22 ticks: 2 MEM_OUT: {'opcode': 'pop_addr', 'arg': '102'} pop_addr 102   
-    DEBUG   machine:simulation    PC: 23 ticks: 6 MEM_OUT: {'opcode': 'push', 'arg': '4000000'} push 4000000   
-    DEBUG   machine:simulation    PC: 24 ticks: 8 MEM_OUT: {'opcode': 'pop_addr', 'arg': '103'} pop_addr 103   
+    DEBUG   machine:simulation    PC: 22 ticks: 2 MEM_OUT: {'opcode': 'pop_addr', 'arg': '102'} pop_addr 102
+    DEBUG   machine:simulation    PC: 23 ticks: 6 MEM_OUT: {'opcode': 'push', 'arg': '4000000'} push 4000000
+    DEBUG   machine:simulation    PC: 24 ticks: 8 MEM_OUT: {'opcode': 'pop_addr', 'arg': '103'} pop_addr 103
     DEBUG   machine:simulation    PC: 25 ticks: 12 MEM_OUT: {'opcode': 'push', 'arg': '2'} push 2
     DEBUG   machine:simulation    PC: 26 ticks: 14 MEM_OUT: {'opcode': 'push', 'arg': '2'} push 2
     DEBUG   machine:simulation    PC: 27 ticks: 16 MEM_OUT: {'opcode': 'push', 'arg': '1'} push 1
-    DEBUG   machine:simulation    PC: 28 ticks: 18 MEM_OUT: {'opcode': 'add', 'arg': ''} add 
-    DEBUG   machine:simulation    PC: 29 ticks: 20 MEM_OUT: {'opcode': 'pop_addr', 'arg': '101'} pop_addr 101  
+    DEBUG   machine:simulation    PC: 28 ticks: 18 MEM_OUT: {'opcode': 'add', 'arg': ''} add
+    DEBUG   machine:simulation    PC: 29 ticks: 20 MEM_OUT: {'opcode': 'pop_addr', 'arg': '101'} pop_addr 101
     DEBUG   machine:simulation    PC: 30 ticks: 24 MEM_OUT: {'opcode': 'push_addr', 'arg': '101'} push_addr 101
-    DEBUG   machine:simulation    PC: 31 ticks: 27 MEM_OUT: {'opcode': 'swap', 'arg': ''} swap 
+    DEBUG   machine:simulation    PC: 31 ticks: 27 MEM_OUT: {'opcode': 'swap', 'arg': ''} swap
     DEBUG   machine:simulation    PC: 32 ticks: 30 MEM_OUT: {'opcode': 'push_addr', 'arg': '101'} push_addr 101
     DEBUG   machine:simulation    PC: 33 ticks: 33 MEM_OUT: {'opcode': 'jmp', 'arg': 4} jmp 4
-    DEBUG   machine:simulation    PC: 4 ticks: 34 MEM_OUT: {'opcode': 'push_addr', 'arg': '101'} push_addr 101 
+    DEBUG   machine:simulation    PC: 4 ticks: 34 MEM_OUT: {'opcode': 'push_addr', 'arg': '101'} push_addr 101
     DEBUG   machine:simulation    PC: 5 ticks: 37 MEM_OUT: {'opcode': 'push', 'arg': '2'} push 2
     DEBUG   machine:simulation    PC: 6 ticks: 39 MEM_OUT: {'opcode': 'div', 'arg': ''} div
     DEBUG   machine:simulation    PC: 7 ticks: 41 MEM_OUT: {'opcode': 'push', 'arg': '2'} push 2
@@ -179,7 +179,7 @@ out_log: |-
     DEBUG   machine:simulation    PC: 33 ticks: 181 MEM_OUT: {'opcode': 'jmp', 'arg': 4} jmp 4
     DEBUG   machine:simulation    PC: 4 ticks: 182 MEM_OUT: {'opcode': 'push_addr', 'arg': '101'} push_addr 101
     DEBUG   machine:simulation    PC: 5 ticks: 185 MEM_OUT: {'opcode': 'push', 'arg': '2'} push 2
-    DEBUG   machine:simulation    PC: 6 ticks: 187 MEM_OUT: {'opcode': 'div', 'arg': ''} div 
+    DEBUG   machine:simulation    PC: 6 ticks: 187 MEM_OUT: {'opcode': 'div', 'arg': ''} div
     DEBUG   machine:simulation    PC: 7 ticks: 189 MEM_OUT: {'opcode': 'push', 'arg': '2'} push 2
     DEBUG   machine:simulation    PC: 8 ticks: 191 MEM_OUT: {'opcode': 'mul', 'arg': ''} mul
     DEBUG   machine:simulation    PC: 9 ticks: 193 MEM_OUT: {'opcode': 'push_addr', 'arg': '101'} push_addr 101
