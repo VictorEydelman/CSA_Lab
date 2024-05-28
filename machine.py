@@ -316,7 +316,7 @@ class ControlUnit:
             self.data_path.signal_tick()
             self.data_path.interruption_controller()
             self.stack_return.append(self.pc)
-            self.pc = arg-1
+            self.pc = arg - 1
             self.data_path.signal_tick()
             self.data_path.interruption_controller()
         elif opcode == Opcode.STORE:
