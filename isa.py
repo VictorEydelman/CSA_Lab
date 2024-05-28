@@ -25,7 +25,6 @@ class Opcode(str, Enum):
     DIV = "div"  # 0
     CALL = "call"  # 2
     RET = "ret"  # 0
-    PRINT = "print"  # 0
     WORD = "word"  # 1
     RESW = "resw"  # 1
     LOAD = "load"  # 2

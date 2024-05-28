@@ -89,7 +89,6 @@ class DataPath:
             self.stack_data.append(left)
             self.alu = right
 
-
     def in_alu_with_memory(self, operation, left, right):
         if operation == "from_memory":
             self.alu = self.memory[int(left)]["arg"]
@@ -124,9 +123,8 @@ class DataPath:
             self.operation_in_alu(operation, left, right)
         elif operation == "store":
             i = 0
-            symbol = 1
-            while int(right) > i and symbol != 0 and self.memory[left + i]["opcode"] == Opcode.WORD:
-                symbol = int(self.memory[left + i]["arg"])
+            symbol = int(self.memory[left + i]["arg"])
+            while symbol != 0:
                 self.signal_tick()
                 self.a_interruption()
                 self.alu = symbol
@@ -134,6 +132,7 @@ class DataPath:
                 self.signal_tick()
                 self.a_interruption()
                 i += 1
+                symbol = int(self.memory[left + i]["arg"])
         else:
             self.in_alu_with_memory(operation, left, right)
         self.flag()
@@ -147,11 +146,11 @@ class DataPath:
     def signal_pop(self):
         self.stack_data.pop()
 
-    def signal_interruption_EI(self):
-        self.interruption=True
+    def signal_interruption_ei(self):
+        self.interruption = True
 
-    def signal_interruption_DI(self):
-        self.interruption=False
+    def signal_interruption_di(self):
+        self.interruption = False
 
 
 class ControlUnit:
@@ -215,11 +214,11 @@ class ControlUnit:
             self.data_path.signal_tick()
             self.data_path.a_interruption()
         elif opcode == Opcode.EI:
-            self.data_path.signal_interruption_EI()
+            self.data_path.signal_interruption_ei()
             self.data_path.signal_tick()
             self.data_path.a_interruption()
         elif opcode == Opcode.DI:
-            self.data_path.signal_interruption_DI()
+            self.data_path.signal_interruption_di()
             self.data_path.signal_tick()
         elif opcode == Opcode.LOAD:
             self.data_path.signal_tick()
@@ -298,7 +297,6 @@ class ControlUnit:
             self.data_path.a_interruption()
 
     def instruction_decoder(self):
-        self.pc += 1
         ir = self.data_path.memory[self.pc]
         opcode = ir["opcode"]
         if (
@@ -310,7 +308,7 @@ class ControlUnit:
         ):
             self.branching(opcode, ir["arg"])
         elif opcode == Opcode.HALT:
-            return "halt"
+            raise StopIteration
         elif opcode == Opcode.PUSH or opcode == Opcode.PUSH_ADDR or opcode == Opcode.POP or opcode == Opcode.POP_ADDR:
             self.push_pop_stack(opcode, ir["arg"])
         elif opcode == Opcode.CALL:
@@ -318,21 +316,16 @@ class ControlUnit:
             self.data_path.signal_tick()
             self.data_path.a_interruption()
             self.stack_return.append(self.pc)
-            self.pc = arg - 1
+            self.pc = arg
             self.data_path.signal_tick()
             self.data_path.a_interruption()
         elif opcode == Opcode.STORE:
             arg = ir["arg"]
             if arg != "":
                 self.data_path.to_stack(arg)
-                self.data_path.in_alu("from_memory", left_sel="stack")
                 self.data_path.signal_tick()
                 self.data_path.a_interruption()
-                self.data_path.signal_stack()
-                self.data_path.to_stack(arg + 1)
-                self.data_path.signal_tick()
-                self.data_path.a_interruption()
-                self.data_path.in_alu("store", left_sel="stack", right_sel="stack")
+                self.data_path.in_alu("store", left_sel="stack")
                 self.data_path.signal_tick()
                 self.data_path.a_interruption()
             else:
@@ -345,10 +338,11 @@ class ControlUnit:
                 self.data_path.a_interruption()
         else:
             self.without_arg(opcode)
+        self.pc += 1
         return ""
 
     def __repr__(self):
-        state_repr = "PC: {} MEM_OUT: {}".format(self.pc, self.data_path.memory[self.pc])
+        state_repr = "PC: {} ticks: {} MEM_OUT: {}".format(self.pc, self.data_path.tick, self.data_path.memory[self.pc])
         instr = self.data_path.memory[self.pc]
         opcode = instr["opcode"]
         instr_repr = str(opcode)
@@ -361,11 +355,14 @@ def simulation(code, input_token, input_address, memory, limit):
     data_path = DataPath(memory, input_token, input_address)
     control_unit = ControlUnit(code, data_path)
     i = 0
-    for i in range(limit):
-        rez = control_unit.instruction_decoder()
-        if rez == "halt":
-            break
-        logging.debug("%s", control_unit)
+    try:
+        for i in range(limit):
+            control_unit.instruction_decoder()
+            logging.debug("%s", control_unit)
+    except EOFError:
+        logging.warning("Input buufer is empty!")
+    except StopIteration:
+        pass
 
     logging.info("output_buffer: %s", repr("".join(str(data_path.memory[2]["arg"]))))
     return "".join(str(data_path.memory[2]["arg"])), i + 1, data_path.tick
@@ -382,11 +379,13 @@ def main(program_file, input_file):
             for num, char in t:
                 input_address.append(num)
                 input_token.append(char)
+            input_address.append(input_address[-1])
+            input_token.append("\n")
 
     output, instr, tick = simulation(code, input_token, input_address, 200, 1000)
     print("".join(output))
-    print(instr)
-    print(tick)
+    print("instr_counter:", instr)
+    print("ticks:", tick)
 
 
 if __name__ == "__main__":

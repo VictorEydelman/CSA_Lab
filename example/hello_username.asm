@@ -1,13 +1,12 @@
 sym_in:
-    resw 2
     word 60
     word 32
+    word 0
 sym_out:
-    resw 2
     word 62
     word 32
+    word 0
 what:
-    resw 21
     word 87
     word 104
     word 97
@@ -29,7 +28,6 @@ what:
     word 10
     word 0
 hello:
-    resw 7
     word 72
     word 101
     word 108
@@ -37,6 +35,7 @@ hello:
     word 111
     word 44
     word 32
+    word 0
 _start:
     ei
     load_symbol

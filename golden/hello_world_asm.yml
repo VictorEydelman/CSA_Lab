@@ -1,6 +1,5 @@
 in_source: |-
   hello_world:
-      resw 11
       word 72
       word 101
       word 108
@@ -12,6 +11,7 @@ in_source: |-
       word 114
       word 108
       word 100
+      word 0
   _start:
       store hello_world
       halt
@@ -34,9 +34,10 @@ out_code: |-
   {"index": 17, "opcode": "store", "arg": 4, "term": [14, 0, "store hello_world"]},
   {"index": 18, "opcode": "halt", "arg": "", "term": [15, 0, "halt"]}]
 out_stdout: |-
-  Hello World
-  2
-  26
+  Hello World                                                                                
+  instr_counter: 3                                                                           
+  ticks: 24
 out_log: |-
-  DEBUG   machine:simulation    PC: 17 MEM_OUT: {'opcode': 'store', 'arg': 4} store 4
-  INFO    machine:simulation    output_buffer: 'Hello World'
+  DEBUG   machine:simulation    PC: 17 ticks: 0 MEM_OUT: {'opcode': 'store', 'arg': 4} store 4
+  DEBUG   machine:simulation    PC: 18 ticks: 24 MEM_OUT: {'opcode': 'halt', 'arg': ''} halt 
+  INFO    machine:simulation    output_buffer: 'Hello World'    

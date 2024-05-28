@@ -1,5 +1,4 @@
 hello_world:
-    resw 11
     word 72
     word 101
     word 108
@@ -11,6 +10,7 @@ hello_world:
     word 114
     word 108
     word 100
+    word 0
 _start:
     store hello_world
     halt
