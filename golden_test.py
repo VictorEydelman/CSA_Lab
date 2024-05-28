@@ -9,7 +9,7 @@ import pytest
 import translator_asm
 
 
-@pytest.mark.golden_test("golden/hello_world_asm.yml")
+@pytest.mark.golden_test("golden/*_asm.yml")
 def test_translator_asm_and_machine(golden, caplog):
     """Почти полная копия test_translator_and_machine из golden_bf_test. Детали
     см. там."""
