@@ -2,8 +2,8 @@
 # Лабораторная работа №3 по Архитектуре Компьютера
 
 * Эйдельман Виктор Аркадьевич. P3214
-* asm|stack|neum|hw|instr|struct|trap->stream|mem|cstr|prob2|cache
-* Базовый вариант:asm|stack|neum|hw|instr|struct|trap|mem|cstr|prob2|-
+* asm | stack | neum | hw | instr | struct | trap -> stream | mem | cstr | prob2 | cache
+* Базовый вариант: asm | stack | neum | hw | instr | struct | trap | mem | cstr | prob2 | -
 
 ## Язык программирования - Assembly
 
@@ -456,8 +456,8 @@ golden_test.py::test_translator_asm_and_machine[golden/cat_asm.yml] PASSED [100%
 ```
 
 ```text
-| ФИО                         |алг           |LoC|code инстр|инстр|такт|
-| Эйдельман Виктор Аркадьевич |cat           |11 |    10    | 16  |351 |
-| Эйдельман Виктор Аркадьевич |hello_world   |16 |    15    | 3   |24  |
-| Эйдельман Виктор Аркадьевич |hello_username|56 |    51    |23   |116 |
+| ФИО                         |алг           |LoC|code инстр|инстр|такт|                                   вариант                                  |
+| Эйдельман Виктор Аркадьевич |cat           |11 |    10    | 16  |351 | (asm | stack | neum | hw | instr | struct | trap | mem | cstr | prob2 | -) |
+| Эйдельман Виктор Аркадьевич |hello_world   |16 |    15    | 3   |24  | (asm | stack | neum | hw | instr | struct | trap | mem | cstr | prob2 | -) |
+| Эйдельман Виктор Аркадьевич |hello_username|56 |    51    |23   |116 | (asm | stack | neum | hw | instr | struct | trap | mem | cstr | prob2 | -) |
 ```
