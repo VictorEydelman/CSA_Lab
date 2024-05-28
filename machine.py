@@ -342,12 +342,13 @@ class ControlUnit:
         return ""
 
     def __repr__(self):
-        state_repr = "PC: {} ticks: {} MEM_OUT: {}".format(self.pc, self.data_path.tick, self.data_path.memory[self.pc])
+        state_repr = "PC: {} ticks: {} interruption: {} in MEM_OUT: {}".format(
+            self.pc, self.data_path.tick, self.data_path.interruption, self.data_path.memory[self.pc]
+        )
         instr = self.data_path.memory[self.pc]
         opcode = instr["opcode"]
         instr_repr = str(opcode)
-        if "arg" in instr:
-            instr_repr += " {}".format(instr["arg"])
+        instr_repr += " {}".format(instr["arg"])
         return "{} {}".format(state_repr, instr_repr).strip()
 
 

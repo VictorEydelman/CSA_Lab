@@ -117,26 +117,26 @@ out_stdout: |-
   instr_counter: 23
   ticks: 116
 out_log: |-
-  DEBUG   machine:simulation    PC: 39 ticks: 0 MEM_OUT: {'opcode': 'ei', 'arg': ''} ei
-  DEBUG   machine:simulation    PC: 40 ticks: 3 MEM_OUT: {'opcode': 'load_symbol', 'arg': ''} load_symbol
-  DEBUG   machine:simulation    PC: 41 ticks: 10 MEM_OUT: {'opcode': 'push', 'arg': '10'} push 10
-  DEBUG   machine:simulation    PC: 42 ticks: 12 MEM_OUT: {'opcode': 'sub', 'arg': ''} sub
-  DEBUG   machine:simulation    PC: 43 ticks: 20 MEM_OUT: {'opcode': 'jz', 'arg': 45} jz 45
-  DEBUG   machine:simulation    PC: 44 ticks: 20 MEM_OUT: {'opcode': 'jmp', 'arg': 38} jmp 38
-  DEBUG   machine:simulation    PC: 38 ticks: 21 MEM_OUT: {'opcode': 'nop', 'arg': 0} nop 0
-  DEBUG   machine:simulation    PC: 39 ticks: 21 MEM_OUT: {'opcode': 'ei', 'arg': ''} ei
-  DEBUG   machine:simulation    PC: 40 ticks: 22 MEM_OUT: {'opcode': 'load_symbol', 'arg': ''} load_symbol
-  DEBUG   machine:simulation    PC: 41 ticks: 25 MEM_OUT: {'opcode': 'push', 'arg': '10'} push 10
-  DEBUG   machine:simulation    PC: 42 ticks: 27 MEM_OUT: {'opcode': 'sub', 'arg': ''} sub
-  DEBUG   machine:simulation    PC: 43 ticks: 29 MEM_OUT: {'opcode': 'jz', 'arg': 45} jz 45
-  DEBUG   machine:simulation    PC: 45 ticks: 30 MEM_OUT: {'opcode': 'store', 'arg': 7} store 7
-  DEBUG   machine:simulation    PC: 46 ticks: 36 MEM_OUT: {'opcode': 'store', 'arg': 10} store 10
-  DEBUG   machine:simulation    PC: 47 ticks: 76 MEM_OUT: {'opcode': 'store', 'arg': 4} store 4
-  DEBUG   machine:simulation    PC: 48 ticks: 82 MEM_OUT: {'opcode': 'load', 'arg': ''} load
-  DEBUG   machine:simulation    PC: 49 ticks: 85 MEM_OUT: {'opcode': 'store', 'arg': ''} store
-  DEBUG   machine:simulation    PC: 50 ticks: 88 MEM_OUT: {'opcode': 'store', 'arg': 7} store 7
-  DEBUG   machine:simulation    PC: 51 ticks: 94 MEM_OUT: {'opcode': 'store', 'arg': 30} store 30
-  DEBUG   machine:simulation    PC: 52 ticks: 110 MEM_OUT: {'opcode': 'load', 'arg': ''} load
-  DEBUG   machine:simulation    PC: 53 ticks: 113 MEM_OUT: {'opcode': 'store', 'arg': ''} store
-  DEBUG   machine:simulation    PC: 54 ticks: 116 MEM_OUT: {'opcode': 'halt', 'arg': ''} halt
+  DEBUG   machine:simulation    PC: 39 ticks: 0 interruption: True in MEM_OUT: {'opcode': 'ei', 'arg': ''} ei
+  DEBUG   machine:simulation    PC: 40 ticks: 3 interruption: True in MEM_OUT: {'opcode': 'load_symbol', 'arg': ''} load_symbol 
+  DEBUG   machine:simulation    PC: 41 ticks: 10 interruption: True in MEM_OUT: {'opcode': 'push', 'arg': '10'} push 10         
+  DEBUG   machine:simulation    PC: 42 ticks: 12 interruption: True in MEM_OUT: {'opcode': 'sub', 'arg': ''} sub                
+  DEBUG   machine:simulation    PC: 43 ticks: 20 interruption: True in MEM_OUT: {'opcode': 'jz', 'arg': 45} jz 45               
+  DEBUG   machine:simulation    PC: 44 ticks: 20 interruption: True in MEM_OUT: {'opcode': 'jmp', 'arg': 38} jmp 38             
+  DEBUG   machine:simulation    PC: 38 ticks: 21 interruption: True in MEM_OUT: {'opcode': 'nop', 'arg': 0} nop 0               
+  DEBUG   machine:simulation    PC: 39 ticks: 21 interruption: True in MEM_OUT: {'opcode': 'ei', 'arg': ''} ei                  
+  DEBUG   machine:simulation    PC: 40 ticks: 22 interruption: True in MEM_OUT: {'opcode': 'load_symbol', 'arg': ''} load_symbol
+  DEBUG   machine:simulation    PC: 41 ticks: 25 interruption: True in MEM_OUT: {'opcode': 'push', 'arg': '10'} push 10         
+  DEBUG   machine:simulation    PC: 42 ticks: 27 interruption: True in MEM_OUT: {'opcode': 'sub', 'arg': ''} sub                
+  DEBUG   machine:simulation    PC: 43 ticks: 29 interruption: True in MEM_OUT: {'opcode': 'jz', 'arg': 45} jz 45               
+  DEBUG   machine:simulation    PC: 45 ticks: 30 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': 7} store 7           
+  DEBUG   machine:simulation    PC: 46 ticks: 36 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': 10} store 10         
+  DEBUG   machine:simulation    PC: 47 ticks: 76 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': 4} store 4           
+  DEBUG   machine:simulation    PC: 48 ticks: 82 interruption: True in MEM_OUT: {'opcode': 'load', 'arg': ''} load
+  DEBUG   machine:simulation    PC: 49 ticks: 85 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': ''} store
+  DEBUG   machine:simulation    PC: 50 ticks: 88 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': 7} store 7
+  DEBUG   machine:simulation    PC: 51 ticks: 94 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': 30} store 30
+  DEBUG   machine:simulation    PC: 52 ticks: 110 interruption: True in MEM_OUT: {'opcode': 'load', 'arg': ''} load
+  DEBUG   machine:simulation    PC: 53 ticks: 113 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': ''} store
+  DEBUG   machine:simulation    PC: 54 ticks: 116 interruption: True in MEM_OUT: {'opcode': 'halt', 'arg': ''} halt
   INFO    machine:simulation    output_buffer: '> What is your name?\n< Vikor\n> Hello, Vikor\n'
