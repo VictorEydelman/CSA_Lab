@@ -20,10 +20,10 @@ def translate_stage(text):
             assert len(sub_token) == 2, "{}".format(token)
             mnemonic, arg = sub_token
             opcode = Opcode(mnemonic)
-            code.append({"index": len(code) + 4, "opcode": opcode, "arg": arg, "term": Term(num, 0, token)})
+            code.append({"index": len(code) + 4, "opcode": opcode, "arg": arg})
         else:
             opcode = Opcode(token)
-            code.append({"index": len(code) + 4, "opcode": opcode, "arg": "", "term": Term(num, 0, token)})
+            code.append({"index": len(code) + 4, "opcode": opcode, "arg": ""})
 
     return labels, code
 

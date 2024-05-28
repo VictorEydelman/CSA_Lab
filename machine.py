@@ -45,7 +45,7 @@ class DataPath:
                 a = self.input_token[self.input_address.index(num)]
                 self.memory[0] = {"opcode": self.memory[0]["opcode"], "arg": self.memory[0]["arg"] + a}
                 self.signal_tick()
-                self.memory[1] = {"opcode": self.memory[0]["opcode"], "arg": ord(a)}
+                self.memory[1] = {"opcode": self.memory[0]["opcode"], "arg": ord(a) % (2**32)}
                 self.input_address[self.input_address.index(num)] = 0
                 self.signal_tick()
             num += 1
@@ -95,7 +95,7 @@ class DataPath:
         elif operation == "to_memory":
             if int(left) != 2:
                 self.alu = int(right)
-                self.memory[int(left)] = {"opcode": self.memory[int(left)]["opcode"], "arg": right}
+                self.memory[int(left)] = {"opcode": self.memory[int(left)]["opcode"], "arg": int(right) % (2**32)}
             else:
                 self.alu = str(right)
                 self.memory[int(left)] = {
@@ -382,7 +382,7 @@ def main(program_file, input_file):
             input_address.append(input_address[-1])
             input_token.append("\n")
 
-    output, instr, tick = simulation(code, input_token, input_address, 200, 1000)
+    output, instr, tick = simulation(code, input_token, input_address, 256, 1000)
     print("".join(output))
     print("instr_counter:", instr)
     print("ticks:", tick)
