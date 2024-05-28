@@ -24,7 +24,6 @@ out_code: |-
   {"index": 11, "opcode": "load", "arg": ""},
   {"index": 12, "opcode": "store", "arg": ""},
   {"index": 13, "opcode": "halt", "arg": ""}]
-
 out_stdout: |-
   Vikor
 
