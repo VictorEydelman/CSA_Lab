@@ -14,7 +14,7 @@ in_source: |-
       word 0;
   _start:
       store hello_world
-      halt
+      halt;
 in_stdin: |-
 
 out_code: |-
