@@ -7,7 +7,7 @@
 
 ## Язык программирования - Assembly
 
-```
+```text
 program ::= { line }
 
 line ::= label [ comment ] "\n"
@@ -118,19 +118,19 @@ comment ::= ";" <any symbols except "\n">
 7. Количество ячеек в памяти 256.
 8. Ячейки стеков состоят только из аргументов.
 9. Работа со стеком происходит только через верний элемент стека, через TOS.
-```
+```text
             Memory                      Stack_data              Return_stack
-+----------------------------+     +------------------+     +------------------+  
-| 00 : input_buffer          |     | 00 : argument    |     | 00 : argument    |
-| 01 : input_buffer_symbol   |     | 01 : argument    |     | 01 : argument    |
-| 02 : output_buffer         |     | 02 : argument    |     | 02 : argument    |
-| 03 : instruction, argument |     |        ...       |     |        ...       |
-| 04 : instruction, argument |     | n : argument     |     | n : argument     |
-|            ...             |     |        ...       |     |        ...       |
-| n  : program start         |     | i : argument     |     | i : argument     |
-|            ...             |     | i+1 : argument   |     | i+1 : argument   |
-| i  : instruction, argument |     |        ...       |     |        ...       |
-| i+1: instruction, argument |     +------------------+     +------------------+
++----------------------------+     +------------------+     +----------------+  
+| 00 : input_buffer          |     | 00 : argument    |     | 00 : argument  |
+| 01 : input_buffer_symbol   |     | 01 : argument    |     | 01 : argument  |
+| 02 : output_buffer         |     | 02 : argument    |     | 02 : argument  |
+| 03 : instruction, argument |     |        ...       |     |        ...     |
+| 04 : instruction, argument |     | n : argument     |     | n : argument   |
+|            ...             |     |        ...       |     |        ...     |
+| n  : program start         |     | i : argument     |     | i : argument   |
+|            ...             |     | i+1 : argument   |     | i+1 : argument |
+| i  : instruction, argument |     |        ...       |     |        ...     |
+| i+1: instruction, argument |     +------------------+     +----------------+
 |            ...             |
 +----------------------------+
 ```
@@ -192,7 +192,7 @@ halt | 0 | остановить процессор
   перехода и перехода на подпрограмму.
 * Первый элеменнт списка хранит индекс старта программы с ключом _start.
 Пример:
-```
+```text
 [
        {
               "_start": 1
@@ -313,7 +313,7 @@ halt | 0 | остановить процессор
 Обновить конфигурацию golden tests: ```poetry run pytest . -v --update-goldens```
 
 CI при помощи Github Action:
-```
+```text
 name: Python CI
 
 on:
@@ -418,15 +418,15 @@ plugins: golden-0.2.2
 collecting ... collected 4 items
 
 golden_test.py::test_translator_asm_and_machine[golden/prob2_asm.yml] PASSED [ 25%]
-golden_test.py::test_translator_asm_and_machine[golden/hello_world_asm.yml] PASSED [ 50%]
-golden_test.py::test_translator_asm_and_machine[golden/hello_username_asm.yml] PASSED [ 75%]
+golden_test.py::test_translator_asm_and_machine[golden/hello_world_asm.yml]PASSED[50%]
+golden_test.py::test_translator_asm_and_machine[golden/hello_username_asm.yml]PASSED[75%]
 golden_test.py::test_translator_asm_and_machine[golden/cat_asm.yml] PASSED [100%]
 
 ============================== 4 passed in 0.73s ===============================
 ```
-```
-| ФИО                         | алг            | LoC | code инстр | инстр | такт  |
-| Эйдельман Виктор Аркадьевич | cat            | 11  | 10         |   16   |351   |
-| Эйдельман Виктор Аркадьевич | hello_world    | 16  | 15         | 317   |
-| Эйдельман Виктор Аркадьевич | hello_username | 56  | 51         | 1260  |
+```text
+| ФИО                         |алг           |LoC|code инстр|инстр|такт|
+| Эйдельман Виктор Аркадьевич |cat           |11 |    10    | 16  |351 |
+| Эйдельман Виктор Аркадьевич |hello_world   |16 |    15    | 3   |24  |
+| Эйдельман Виктор Аркадьевич |hello_username|56 |    51    |23   |116 |
 ```
