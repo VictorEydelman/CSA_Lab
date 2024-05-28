@@ -348,7 +348,7 @@ class ControlUnit:
         instr_repr = str(opcode)
         if "arg" in instr:
             instr_repr += " {}".format(instr["arg"])
-        return "{} {}".format(state_repr, instr_repr)
+        return "{} {}".format(state_repr, instr_repr).strip()
 
 
 def simulation(code, input_token, input_address, memory, limit):
