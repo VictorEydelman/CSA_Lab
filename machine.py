@@ -46,14 +46,14 @@ class DataPath:
                 self.input_address[self.input_address.index(self.tick)] = 0
                 self.memory[0] = {"opcode": self.memory[0]["opcode"], "arg": self.memory[0]["arg"] + a}
                 self.signal_tick()
-                self.memory[1] = {"opcode": self.memory[0]["opcode"], "arg": ord(a) % (2 ** 32)}
+                self.memory[1] = {"opcode": self.memory[0]["opcode"], "arg": ord(a) % (2**32)}
                 self.signal_tick()
                 self.interruption_controller()
             elif self.tick > max(self.input_address) > 0:
                 self.input_address = [0]
                 self.memory[0] = {"opcode": self.memory[0]["opcode"], "arg": self.memory[0]["arg"] + "\n"}
                 self.signal_tick()
-                self.memory[1] = {"opcode": self.memory[0]["opcode"], "arg": ord("\n") % (2 ** 32)}
+                self.memory[1] = {"opcode": self.memory[0]["opcode"], "arg": ord("\n") % (2**32)}
                 self.signal_tick()
 
     def instructions_in_memory(self, code: list):
