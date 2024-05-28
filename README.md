@@ -146,8 +146,8 @@ comment ::= ";" <any symbols except "\n">
 * В качестве аргументов команды принимают число, аргумент, метка,
   адрес или аргументы из вершины стека.
 * Поток управления:
-  * инкремент PC после каждой команды
-  * Поддерживается условный и безусловный переход
+  - инкремент PC после каждой команды
+  - Поддерживается условный и безусловный переход
 
 ### Набор инструкций
 
@@ -308,8 +308,8 @@ halt | 0 | остановить процессор
 * Для журнала состояний процессора используется стандартный модуль logging.
 * Количество инструкций для моделирования лимитировано.
 * Остановка моделирования осуществляется при:
-  * превышении лимита количества выполняемых инструкций
-  * исключении StopIteration -- если выполнена инструкция halt.
+  - превышении лимита количества выполняемых инструкций
+  - исключении StopIteration -- если выполнена инструкция halt.
 
 ## Тестирование
 
@@ -441,8 +441,7 @@ ticks: 36
 ```shell
 Run poetry run coverage run -m pytest . -v
 ============================= test session starts ========================
-platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.5.0
- -- /home/runner/.cache/pypoetry/virtualenvs/csa-lab3-ZpubCx5H-py3.12/bin/python
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.5.0 -- /home/runner/.cache/pypoetry/virtualenvs/csa-lab3-ZpubCx5H-py3.12/bin/python
 cachedir: .pytest_cache
 rootdir: /home/runner/work/CSA-Lab3/CSA-Lab3
 configfile: pyproject.toml
@@ -450,10 +449,8 @@ plugins: golden-0.2.2
 collecting ... collected 4 items
 
 golden_test.py::test_translator_asm_and_machine[golden/prob2_asm.yml] PASSED [ 25%]
-golden_test.py::test_translator_asm_and_machine
-[golden/hello_world_asm.yml]PASSED[50%]
-golden_test.py::test_translator_asm_and_machine
-[golden/hello_username_asm.yml]PASSED[75%]
+golden_test.py::test_translator_asm_and_machine[golden/hello_world_asm.yml] PASSED [ 50%]
+golden_test.py::test_translator_asm_and_machine[golden/hello_username_asm.yml] PASSED [ 75%]
 golden_test.py::test_translator_asm_and_machine[golden/cat_asm.yml] PASSED [100%]
 
 ============================== 4 passed in 0.73s ===========================
