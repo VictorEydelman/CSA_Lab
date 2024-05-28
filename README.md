@@ -395,22 +395,26 @@ jobs:
 {"index": 12, "opcode": "store", "arg": ""},
 {"index": 13, "opcode": "halt", "arg": ""}]
 (Lab) PS C:\Users\veyde\OneDrive\Документы\Работы ИТМО\АК\Лаба3> python .\machine.py .\target.json .\example\input.txt     
-DEBUG   machine:simulation    PC: 5 ticks: 0 MEM_OUT: {'opcode': 'ei', 'arg': ''} ei 
-DEBUG   machine:simulation    PC: 6 ticks: 3 MEM_OUT: {'opcode': 'load_symbol', 'arg': ''} load_symbol 
-DEBUG   machine:simulation    PC: 7 ticks: 10 MEM_OUT: {'opcode': 'push', 'arg': '10'} push 10
-DEBUG   machine:simulation    PC: 8 ticks: 12 MEM_OUT: {'opcode': 'sub', 'arg': ''} sub
-DEBUG   machine:simulation    PC: 9 ticks: 20 MEM_OUT: {'opcode': 'jz', 'arg': 11} jz 11
-DEBUG   machine:simulation    PC: 10 ticks: 20 MEM_OUT: {'opcode': 'jmp', 'arg': 4} jmp 4
-DEBUG   machine:simulation    PC: 4 ticks: 21 MEM_OUT: {'opcode': 'nop', 'arg': 0} nop 0
-DEBUG   machine:simulation    PC: 5 ticks: 21 MEM_OUT: {'opcode': 'ei', 'arg': ''} ei
-DEBUG   machine:simulation    PC: 6 ticks: 22 MEM_OUT: {'opcode': 'load_symbol', 'arg': ''} load_symbol
-DEBUG   machine:simulation    PC: 7 ticks: 25 MEM_OUT: {'opcode': 'push', 'arg': '10'} push 10
-DEBUG   machine:simulation    PC: 8 ticks: 27 MEM_OUT: {'opcode': 'sub', 'arg': ''} sub
-DEBUG   machine:simulation    PC: 9 ticks: 29 MEM_OUT: {'opcode': 'jz', 'arg': 11} jz 11
-DEBUG   machine:simulation    PC: 11 ticks: 30 MEM_OUT: {'opcode': 'load', 'arg': ''} load
-DEBUG   machine:simulation    PC: 12 ticks: 33 MEM_OUT: {'opcode': 'store', 'arg': ''} store
-DEBUG   machine:simulation    PC: 13 ticks: 36 MEM_OUT: {'opcode': 'halt', 'arg': ''} halt
-INFO    machine:simulation    output_buffer: 'Vikor\n'
+DEBUG   machine:simulation    PC: 5 ticks: 0 interruption: True in MEM_OUT: {'opcode': 'ei', 'arg': ''} ei
+INFO    machine:interruption_controller Interruption
+DEBUG   machine:simulation    PC: 6 ticks: 3 interruption: True in MEM_OUT: {'opcode': 'load_symbol', 'arg': ''} load_symbol
+INFO    machine:interruption_controller Interruption
+INFO    machine:interruption_controller Interruption
+DEBUG   machine:simulation    PC: 7 ticks: 10 interruption: True in MEM_OUT: {'opcode': 'push', 'arg': '10'} push 10
+DEBUG   machine:simulation    PC: 8 ticks: 12 interruption: True in MEM_OUT: {'opcode': 'sub', 'arg': ''} sub
+INFO    machine:interruption_controller Interruption
+DEBUG   machine:simulation    PC: 9 ticks: 18 interruption: True in MEM_OUT: {'opcode': 'jz', 'arg': 11} jz 11
+DEBUG   machine:simulation    PC: 10 ticks: 18 interruption: True in MEM_OUT: {'opcode': 'jmp', 'arg': 4} jmp 4
+DEBUG   machine:simulation    PC: 4 ticks: 19 interruption: True in MEM_OUT: {'opcode': 'nop', 'arg': 0} nop 0
+DEBUG   machine:simulation    PC: 5 ticks: 19 interruption: True in MEM_OUT: {'opcode': 'ei', 'arg': ''} ei
+DEBUG   machine:simulation    PC: 6 ticks: 20 interruption: True in MEM_OUT: {'opcode': 'load_symbol', 'arg': ''} load_symbol
+DEBUG   machine:simulation    PC: 7 ticks: 23 interruption: True in MEM_OUT: {'opcode': 'push', 'arg': '10'} push 10
+DEBUG   machine:simulation    PC: 8 ticks: 25 interruption: True in MEM_OUT: {'opcode': 'sub', 'arg': ''} sub
+DEBUG   machine:simulation    PC: 9 ticks: 27 interruption: True in MEM_OUT: {'opcode': 'jz', 'arg': 11} jz 11
+DEBUG   machine:simulation    PC: 11 ticks: 28 interruption: True in MEM_OUT: {'opcode': 'load', 'arg': ''} load
+DEBUG   machine:simulation    PC: 12 ticks: 31 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': ''} store
+DEBUG   machine:simulation    PC: 13 ticks: 34 interruption: True in MEM_OUT: {'opcode': 'halt', 'arg': ''} halt
+INFO    machine:simulation    output_buffer: 'Viko\n'
 Vikor
 
 instr_counter: 16
@@ -421,8 +425,9 @@ ticks: 36
 
 ```shell
 Run poetry run coverage run -m pytest . -v
-============================= test session starts ==============================
-platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.5.0 -- /home/runner/.cache/pypoetry/virtualenvs/csa-lab3-ZpubCx5H-py3.12/bin/python
+============================= test session starts ========================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.5.0
+ -- /home/runner/.cache/pypoetry/virtualenvs/csa-lab3-ZpubCx5H-py3.12/bin/python
 cachedir: .pytest_cache
 rootdir: /home/runner/work/CSA-Lab3/CSA-Lab3
 configfile: pyproject.toml
@@ -430,11 +435,13 @@ plugins: golden-0.2.2
 collecting ... collected 4 items
 
 golden_test.py::test_translator_asm_and_machine[golden/prob2_asm.yml] PASSED [ 25%]
-golden_test.py::test_translator_asm_and_machine[golden/hello_world_asm.yml]PASSED[50%]
-golden_test.py::test_translator_asm_and_machine[golden/hello_username_asm.yml]PASSED[75%]
+golden_test.py::test_translator_asm_and_machine
+[golden/hello_world_asm.yml]PASSED[50%]
+golden_test.py::test_translator_asm_and_machine
+[golden/hello_username_asm.yml]PASSED[75%]
 golden_test.py::test_translator_asm_and_machine[golden/cat_asm.yml] PASSED [100%]
 
-============================== 4 passed in 0.73s ===============================
+============================== 4 passed in 0.73s ===========================
 ```
 
 ```text
