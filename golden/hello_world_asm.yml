@@ -39,5 +39,5 @@ out_stdout: |-
   ticks: 24
 out_log: |-
   DEBUG   machine:simulation    PC: 17 ticks: 0 MEM_OUT: {'opcode': 'store', 'arg': 4} store 4
-  DEBUG   machine:simulation    PC: 18 ticks: 36 MEM_OUT: {'opcode': 'halt', 'arg': ''} halt 
+  DEBUG   machine:simulation    PC: 18 ticks: 24 MEM_OUT: {'opcode': 'halt', 'arg': ''} halt 
   INFO    machine:simulation    output_buffer: 'Hello World'
