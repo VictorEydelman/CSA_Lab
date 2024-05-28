@@ -42,11 +42,11 @@ class DataPath:
         if self.input_address:
             if self.tick in self.input_address and self.interruption and self.tick <= max(self.input_address):
                 a = self.input_token[self.input_address.index(self.tick)]
+                logging.info("Interruption")
                 self.input_address[self.input_address.index(self.tick)] = 0
                 self.memory[0] = {"opcode": self.memory[0]["opcode"], "arg": self.memory[0]["arg"] + a}
                 self.signal_tick()
                 self.memory[1] = {"opcode": self.memory[0]["opcode"], "arg": ord(a) % (2 ** 32)}
-                print(self.input_address, self.tick)
                 self.signal_tick()
                 self.interruption_controller()
             elif self.tick > max(self.input_address) > 0:
