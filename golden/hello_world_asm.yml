@@ -19,20 +19,20 @@ in_stdin: |-
 
 out_code: |-
   [{"_start": 15},
-  {"index": 4, "opcode": "word", "arg": "72", "term": [1, 0, "word 72"]},
-  {"index": 5, "opcode": "word", "arg": "101", "term": [2, 0, "word 101"]},
-  {"index": 6, "opcode": "word", "arg": "108", "term": [3, 0, "word 108"]},
-  {"index": 7, "opcode": "word", "arg": "108", "term": [4, 0, "word 108"]},
-  {"index": 8, "opcode": "word", "arg": "111", "term": [5, 0, "word 111"]},
-  {"index": 9, "opcode": "word", "arg": "32", "term": [6, 0, "word 32"]},
-  {"index": 10, "opcode": "word", "arg": "87", "term": [7, 0, "word 87"]},
-  {"index": 11, "opcode": "word", "arg": "111", "term": [8, 0, "word 111"]},
-  {"index": 12, "opcode": "word", "arg": "114", "term": [9, 0, "word 114"]},
-  {"index": 13, "opcode": "word", "arg": "108", "term": [10, 0, "word 108"]},
-  {"index": 14, "opcode": "word", "arg": "100", "term": [11, 0, "word 100"]},
-  {"index": 15, "opcode": "word", "arg": "0", "term": [12, 0, "word 0"]},
-  {"index": 17, "opcode": "store", "arg": 4, "term": [14, 0, "store hello_world"]},
-  {"index": 18, "opcode": "halt", "arg": "", "term": [15, 0, "halt"]}]
+  {"index": 4, "opcode": "word", "arg": "72"},
+  {"index": 5, "opcode": "word", "arg": "101"},
+  {"index": 6, "opcode": "word", "arg": "108"},
+  {"index": 7, "opcode": "word", "arg": "108"},
+  {"index": 8, "opcode": "word", "arg": "111"},
+  {"index": 9, "opcode": "word", "arg": "32"},
+  {"index": 10, "opcode": "word", "arg": "87"},
+  {"index": 11, "opcode": "word", "arg": "111"},
+  {"index": 12, "opcode": "word", "arg": "114"},
+  {"index": 13, "opcode": "word", "arg": "108"},
+  {"index": 14, "opcode": "word", "arg": "100"},
+  {"index": 15, "opcode": "word", "arg": "0"},
+  {"index": 17, "opcode": "store", "arg": 4},
+  {"index": 18, "opcode": "halt", "arg": ""}]
 out_stdout: |-
   Hello World
   instr_counter: 3

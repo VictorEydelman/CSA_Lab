@@ -20,15 +20,15 @@ out_code: |-
   ticks: 36
 out_stdout: |-
   [{"_start": 3},
-  {"index": 5, "opcode": "ei", "arg": "", "term": [1, 0, "ei"]},
-  {"index": 6, "opcode": "load_symbol", "arg": "", "term": [2, 0, "load_symbol"]},
-  {"index": 7, "opcode": "push", "arg": "10", "term": [3, 0, "push 10"]},
-  {"index": 8, "opcode": "sub", "arg": "", "term": [4, 0, "sub"]},
-  {"index": 9, "opcode": "jz", "arg": 11, "term": [5, 0, "jz print"]},
-  {"index": 10, "opcode": "jmp", "arg": 4, "term": [6, 0, "jmp _start"]},
-  {"index": 11, "opcode": "load", "arg": "", "term": [8, 0, "load"]},
-  {"index": 12, "opcode": "store", "arg": "", "term": [9, 0, "store"]},
-  {"index": 13, "opcode": "halt", "arg": "", "term": [10, 0, "halt"]}]
+  {"index": 5, "opcode": "ei", "arg": ""},
+  {"index": 6, "opcode": "load_symbol", "arg": ""},
+  {"index": 7, "opcode": "push", "arg": "10"},
+  {"index": 8, "opcode": "sub", "arg": ""},
+  {"index": 9, "opcode": "jz", "arg": 11},
+  {"index": 10, "opcode": "jmp", "arg": 4},
+  {"index": 11, "opcode": "load", "arg": ""},
+  {"index": 12, "opcode": "store", "arg": ""},
+  {"index": 13, "opcode": "halt", "arg": ""}]
 out_log: |-
   DEBUG   machine:simulation    PC: 5 ticks: 0 MEM_OUT: {'opcode': 'ei', 'arg': ''} ei 
   DEBUG   machine:simulation    PC: 6 ticks: 3 MEM_OUT: {'opcode': 'load_symbol', 'arg': ''} load_symbol  

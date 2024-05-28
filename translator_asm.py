@@ -1,6 +1,6 @@
 import sys
 
-from isa import Opcode, Term, write_code
+from isa import Opcode, write_code
 
 
 def translate_stage(text):

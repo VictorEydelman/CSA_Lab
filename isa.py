@@ -36,10 +36,6 @@ class Opcode(str, Enum):
         return self.value
 
 
-class Term(namedtuple("Term", "line pos symbol")):
-    """ """
-
-
 def write_code(filename, code):
     with open(filename, "w", encoding="utf-8") as file:
         buf = []
