@@ -30,7 +30,9 @@ op0 ::= "inc"
       | "sub"
       | "mul"
       | "swap"
-      | "print"
+      | "store"
+      | "load"
+      | "load_symbol"
 
 op1 ::= "push"
 
@@ -44,6 +46,7 @@ op3 ::= "jmp"
       | "jns"
       | "call"
       | "out"
+      | "store"
 
 op4 ::= "push_addr"
         | "pop_addr"
@@ -66,6 +69,7 @@ comment ::= ";" <any symbols except "\n">
 * ```add``` - произвести сложение двух верхних элементов стека, и записать результат в стек вместо них
 * ```sub``` - произвести вычитание верхнего элемента стека из второго сверху элемента стека, и записать результат в стек вместо них
 * ```mul``` - произвести произведение двух верхних элементов стека, и записать результат в стек вместо них
+* ```div``` - произвести целочисленное деление второго сверхну элемента стека на первый сверху элемент стека, и записать результат в стек вместо них
 * ```swap``` - произвести обмен местами двух верхних элементов стека
 * ```ei``` - разрешение прерывания
 * ```di``` - запрет прерывания
@@ -80,7 +84,9 @@ comment ::= ";" <any symbols except "\n">
 * ```jns``` - переход на указанную метку, если флаг 'N' равен 0
 * ```call``` - переход на подпрограмму по указанной метке, PC записывается в стек возврата
 * ```ret``` - возврат из подпрограммы, восстановление PC из стека
-* ```word``` - определить указаное число в память.
+* ```load``` - выгрузка из input_buffer в стек
+* ```load_symbol``` - выгрузка из input_buffer_symbol в стек
+* ```word``` - определить указаное число в память
 * ```halt``` - остановить процессор
 ## Метки
 Метки для переходов определяются на отдельных строчках.
@@ -89,14 +95,18 @@ comment ::= ";" <any symbols except "\n">
 Модель памяти процессора:
 1. Память команд и данных совместная (архитектура фон Неймана)
 ```
-            Memory
-+----------------------------+
-| 00 : instruction, argument |
-| 01 : instruction, argument |
-|            ...             |
-| n  : program start         |
-|            ...             |
-| i  : instruction, argument |
+            Memory                      Stack_data              Return_data
++----------------------------+     +------------------+     +------------------+  
+| 00 : input_buffer          |     | 00 : argument    |     | 00 : argument    |
+| 01 : input_buffer_symbol   |     | 01 : argument    |     | 01 : argument    |
+| 01 : input_buffer_symbol   |     | 02 : argument    |     | 02 : argument    |
+| 02 : output_buffer         |     |        ...       |     |        ...       |
+| 03 : instruction, argument |     | n : argument     |     | n : argument     |
+| 04 : instruction, argument |     |        ...       |     |        ...       |
+|            ...             |     | i : argument     |     | i : argument     |
+| n  : program start         |     | i+1 : argument   |     | i+1 : argument   |
+|            ...             |     |        ...       |     |        ...       |
+| i  : instruction, argument |     +------------------+     +------------------+
 | i+1: instruction, argument |
 |            ...             |
 +----------------------------+
@@ -109,25 +119,26 @@ comment ::= ";" <any symbols except "\n">
 :-------|:-----------:|--------|
 inc| 1|  инкремент верхнего элемент стека
 dec| 1| декримент верхнего элемент стека
-add | 1| произвести сложение двух верхних элементов стека, и записать результат в стек вместо них
-sub | 1| произвести вычитание верхнего элемента стека из второго сверху элемента стека, и записать результат в стек вместо них
-mul | 1 | произвести произведение двух верхних элементов стека, и записать результат в стек вместо них
-swap |1 | произвести обмен местами двух верхних элементов стека
-ei|1|разрешение прерывания
-di|1|запрет прерывания
-push|1|записать в стек указанное число
-push_addr|1|записать в стек число из памяти с указанным адресом
-pop|1|удалить верхний элемент из стека
-pop_addr|1|удалить верхний элемент из стека и записать его значение по указаному адресу.
+add | 2| произвести сложение двух верхних элементов стека, и записать результат в стек вместо них
+sub | 2| произвести вычитание верхнего элемента стека из второго сверху элемента стека, и записать результат в стек вместо них
+mul | 2 | произвести произведение двух верхних элементов стека, и записать результат в стек вместо них
+div | 2 | произвести целочисленное деление второго сверхну элемента стека на первый сверху элемент стека, и записать результат в стек вместо них
+swap |3 | произвести обмен местами двух верхних элементов стека
+ei |1| разрешение прерывания
+di |1| запрет прерывания
+push |2| записать в стек указанное число
+push_addr |3| записать в стек число из памяти с указанным адресом
+pop |1|удалить верхний элемент из стека
+pop_addr|3|удалить верхний элемент из стека и записать его значение по указаному адресу.
 jmp|1|безусловный переход на указанную метку
 jz|1|переход на указанную метку, если флаг 'Z' равен 1
 jnz|1|переход на указанную метку, если флаг 'Z' равен 0
 jn|1|переход на указанную метку, если флаг 'N' равен 1
 jns|1|переход на указанную метку, если флаг 'N' равен 0
-call|1|переход на подпрограмму по указанной метке, PC записывается в стек возврата
+call|2|переход на подпрограмму по указанной метке, PC записывается в стек возврата
 ret|1|возврат из подпрограммы, восстановление PC из стека
-word|1|определить указаное число в память.
-halt|1|остановить процессор
+word|0|определить указаное число в память.
+halt|0|остановить процессор
 
 ### Кодирование инструкций
 * Машиный код сериализуется в список JSON.
@@ -174,7 +185,7 @@ halt|1|остановить процессор
 Интерфейс командной строки: ```machine.py <machine_code_file> <input_file>
 Реализовано в модуле: machine.
 # DataPath
-![image](https://github.com/VictorEydelman/CSA-Lab3/assets/113546427/66ad8a99-a32f-4527-99d3-2eafa23f69dd)
+![image](https://github.com/VictorEydelman/CSA-Lab3/assets/113546427/eaf3e2f0-0307-4186-a985-f1474202f093)
 <a id="DataPath"></a>
 Реализован в классе ```DataPath```.
 
@@ -203,7 +214,7 @@ halt|1|остановить процессор
 ```interruption controller``` - позволяет принимать данные при прерывания. Передаёт принятые данные в конец значения ячейки памяти 0, где хранится input_buffer, и в ячейку 1, где находится input_last_symbol.
 
 # ControlUnit
-![image](https://github.com/VictorEydelman/CSA-Lab3/assets/113546427/8083a1ff-fef2-4f47-ab3b-9975e2a2c927)
+![image](https://github.com/VictorEydelman/CSA-Lab3/assets/113546427/71cabec9-032c-4549-a8e0-800150d03e52)
 
 Реализован в классе ```Contorl unit```.
 ```DataPath``` - [DataPath](#DataPath)
@@ -229,3 +240,62 @@ halt|1|остановить процессор
 Обновить конфигурацию golden tests: ```poetry run pytest . -v --update-goldens```
 
 CI при помощи Github Action:
+```
+name: Python CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install poetry
+          poetry install
+
+      - name: Run tests and collect coverage
+        run: |
+          poetry run coverage run -m pytest .
+          poetry run coverage report -m
+        env:
+          CI: true
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install poetry
+          poetry install
+
+      - name: Check code formatting with Ruff
+        run: poetry run ruff format --check .
+
+      - name: Run Ruff linters
+        run: poetry run ruff check .
+```
+Пример использования и журнала работы процессора на примере ```cat```:
