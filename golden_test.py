@@ -9,7 +9,7 @@ import pytest
 import translator_asm
 
 
-@pytest.mark.golden_test("golden/hello_username_asm.yml")
+@pytest.mark.golden_test("golden/*_asm.yml")
 def test_translator_asm_and_machine(golden, caplog):
     caplog.set_level(logging.DEBUG)
     with tempfile.TemporaryDirectory() as tmpdirname:
