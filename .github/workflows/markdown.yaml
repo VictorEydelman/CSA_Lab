@@ -3,7 +3,7 @@ name: Markdown CI
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   lint:
