@@ -1,4 +1,4 @@
-num:
+    num:
         push_addr 101
         push 2
         div
@@ -7,7 +7,7 @@ num:
         push_addr 101
         sub
         jz ch
-        jmp back
+        ret
     ch:
         pop
         push_addr 101
@@ -15,7 +15,7 @@ num:
         add
         pop_addr 102
         push 0
-        jmp back
+        ret
     _start:
         push 2
         pop_addr 102
@@ -30,8 +30,7 @@ num:
         push_addr 101
         swap
         push_addr 101
-        jmp num
-    back:
+        call num
         pop
         push_addr 103
         push_addr 101
