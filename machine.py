@@ -50,7 +50,7 @@ class DataPath:
                 self.signal_tick()
             num += 1
 
-    def s(self, code: list):
+    def instructions_in_memory(self, code: list):
         for mem in code:
             self.memory[mem["index"]] = {"opcode": mem["opcode"], "arg": mem["arg"]}
 
@@ -164,7 +164,7 @@ class ControlUnit:
         self.pc = int(code[0]["_start"]) + 1
         del code[0]
         self.stack_return = []
-        data_path.s(code)
+        data_path.instructions_in_memory(code)
         self.code = code
 
     def inc_dec(self, opcode):
