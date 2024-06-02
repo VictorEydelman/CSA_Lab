@@ -230,7 +230,7 @@ halt | 0 | остановить процессор
 
 # DataPath
 
-![image](https://github.com/VictorEydelman/CSA_Lab/assets/113546427/b7d887f8-a3dc-4725-8777-da2f96e4e0f3)
+![image](https://github.com/VictorEydelman/CSA_Lab/assets/113546427/dc81ffac-22d6-4066-b687-0c46a8a16aea)
 
 Реализован в классе ```DataPath```.
 
