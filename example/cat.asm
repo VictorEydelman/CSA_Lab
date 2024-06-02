@@ -1,5 +1,5 @@
 number:
-    word 1
+    word 0
 print_name:
     pop
     push_addr number
