@@ -86,23 +86,23 @@ in_source: |-
   number:               ; Указатель на элемент в input_buffer.
       word 0
   print:
-      call print_words ; вызов функции для вывода "> "
+      call print_words ; вызов подпрограммы для вывода "> "
       push what
       pop_addr symbol
-      call print_words ; вызов функции для вывода "What is your name?\n"
+      call print_words ; вызов подпрограммы для вывода "What is your name?\n"
       push sym_in
       pop_addr symbol
-      call print_words ; вызов функции для вывода "< "
-      call print_name ; вызов функции для вывода имени
+      call print_words ; вызов подпрограммы для вывода "< "
+      call print_name ; вызов подпрограммы для вывода имени
       push sym_out
       pop_addr symbol
-      call print_words ; вызов функции для вывода "> "
+      call print_words ; вызов подпрограммы для вывода "> "
       push hello
       pop_addr symbol
-      call print_words ; вызов функции для вывода "Hello, "
+      call print_words ; вызов подпрограммы для вывода "Hello, "
       push 0
       pop_addr number
-      call print_name ; вызов функции для вывода имени
+      call print_name ; вызов подпрограммы для вывода имени
       halt
 in_stdin: |-
   [(1,'V'),(5,'i'),(8,'k'),(14,'o'),(15,'r')]
@@ -690,3 +690,4 @@ out_log: |-
   DEBUG   machine:simulation    PC: 63 ticks: 1487 interruption: False in MEM_OUT: {'opcode': 'ret', 'arg': 0} ret 0
   DEBUG   machine:simulation    PC: 95 ticks: 1489 interruption: False in MEM_OUT: {'opcode': 'halt', 'arg': 0} halt 0
   INFO    machine:simulation    output_buffer: '> What is your name?\n< Viko\n> Hello, Viko\n'
+  
