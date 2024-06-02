@@ -1,4 +1,4 @@
-      max:
+    max:
         word 4000000
     now:
         word 0
@@ -24,7 +24,7 @@
         ret
     _start:
         push 2
-        push 2
+        dup
         push 1
     loop:
         add
