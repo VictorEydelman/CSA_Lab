@@ -1,13 +1,13 @@
 in_source: |-
-  sym_in:
+  sym_in:      ;"< "
       word 60
       word 32
       word 0
-  sym_out:
+  sym_out:    ;"> "
       word 62
       word 32
       word 0
-  what:
+  what:        ;"What is your name?\n"
       word 87
       word 104
       word 97
@@ -28,7 +28,7 @@ in_source: |-
       word 63
       word 10
       word 0
-  hello:
+  hello:       ;"Hello, "
       word 72
       word 101
       word 108
@@ -37,14 +37,14 @@ in_source: |-
       word 44
       word 32
       word 0
-  symbol:
+  symbol:              ; Указатель на элемент в строке.
       word sym_out
-  print_words:
+  print_words: 
       push_addr symbol
       push_by
-      jz back
-      store 2
-      push_addr symbol
+      jz back            ; выход из цикла если число равно 0
+      store 2            ; Загрузка символа в output_buffer_str
+      push_addr symbol   ; Инкрмент указателя
       inc
       pop_addr symbol
       jmp print_words
@@ -54,13 +54,13 @@ in_source: |-
       pop
       push_addr number
       load
-      store 2
+      store 2           ; Загрузка символа в output_buffer_str
       push_addr number
-      load
+      load              ; Выгрузка элемента из input_buffer
       push 10
       sub
-      jz end
-      push_addr number
+      jz end            ; выход из цикла если число равно 10
+      push_addr number  ; Инкрмент указателя
       inc
       pop_addr number
       jmp print_name
@@ -68,41 +68,41 @@ in_source: |-
       push 1
       pop_addr number
       ret
-  num:
+  num:                  ; Указатель на элемент в input_buffer.
       word 0
   _start:
       ei
       push_addr num
-      load
+      load              ; Выгрузка элемента из input_buffer
       push 10
       sub
       di
-      jz print
+      jz print          ; выход из цикла если число равно 10
       pop
-      push_addr num
+      push_addr num     ; Инкрмент указателя
       inc
       pop_addr num
       jmp _start
-  number:
+  number:               ; Указатель на элемент в input_buffer.
       word 0
   print:
-      call print_words
+      call print_words ; вызов функции для вывода "> "
       push what
       pop_addr symbol
-      call print_words
+      call print_words ; вызов функции для вывода "What is your name?\n"
       push sym_in
       pop_addr symbol
-      call print_words
-      call print_name
+      call print_words ; вызов функции для вывода "< "
+      call print_name ; вызов функции для вывода имени
       push sym_out
       pop_addr symbol
-      call print_words
+      call print_words ; вызов функции для вывода "> "
       push hello
       pop_addr symbol
-      call print_words
+      call print_words ; вызов функции для вывода "Hello, "
       push 0
       pop_addr number
-      call print_name
+      call print_name ; вызов функции для вывода имени
       halt
 in_stdin: |-
   [(1,'V'),(5,'i'),(8,'k'),(14,'o'),(15,'r')]
@@ -211,7 +211,7 @@ out_log: |-
   DEBUG   machine:simulation    PC: 65 ticks: 0 interruption: True in MEM_OUT: {'opcode': 'ei', 'arg': 0} ei 0
   INFO    machine:signal_interruption_controller Interruption
   INFO    machine:signal_interruption_controller Interruption
-  DEBUG   machine:simulation    PC: 66 ticks: 7 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 64} push_addr 64  
+  DEBUG   machine:simulation    PC: 66 ticks: 7 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 64} push_addr 64
   INFO    machine:signal_interruption_controller Interruption
   DEBUG   machine:simulation    PC: 67 ticks: 13 interruption: True in MEM_OUT: {'opcode': 'load', 'arg': 0} load 0
   INFO    machine:signal_interruption_controller Interruption
