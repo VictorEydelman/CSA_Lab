@@ -55,4 +55,3 @@ if __name__ == "__main__":
     assert len(sys.argv) == 3, "Wrong arguments: translator_asm.py <input_file> <target_file>"
     _, sourse, target = sys.argv
     main(sourse, target)
-
