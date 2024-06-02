@@ -1,17 +1,17 @@
 in_source: |-
-  number:
+  number:               ; Указатель на элемент в input_buffer.
       word 0
   print_name:
       pop
       push_addr number
-      load
-      store 2
+      load              ; Выгрузка элемента из input_buffer
+      store 2           ; Загрузка символа в output_buffer_str
       push_addr number
       load
       push 10
       sub
-      jz end
-      push_addr number
+      jz end             ; выход из цикла если число равно 10
+      push_addr number   ; Инкрмент указателя
       inc
       pop_addr number
       jmp print_name
@@ -19,23 +19,23 @@ in_source: |-
       push 1
       pop_addr number
       ret
-  num:
+  num:                  ; Указатель на элемент в input_buffer.
       word 0
   _start:
       ei
       push_addr num
-      load
+      load                ; Выгрузка элемента из input_buffer
       push 10
       sub
       di
-      jz print
+      jz print            ; выход из цикла если число равно 10
       pop
-      push_addr num
+      push_addr num      ; Инкрмент указателя
       inc
       pop_addr num
       jmp _start
   print:
-      call print_name
+      call print_name     ; вызов подпрограммы для вывода имени
       halt
 in_stdin: |-
   [(1,'V'),(5,'i'),(8,'k'),(14,'o'),(15,'r')]
