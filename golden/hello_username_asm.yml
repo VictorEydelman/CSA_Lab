@@ -209,12 +209,12 @@ out_stdout: |-
   ticks: 984
 out_log: |-
   DEBUG   machine:simulation    PC: 65 ticks: 0 interruption: True in MEM_OUT: {'opcode': 'ei', 'arg': 0} ei 0
-  INFO    machine:signal_interruption_controller Interruption                                                                 
+  INFO    machine:signal_interruption_controller Interruption
   DEBUG   machine:simulation    PC: 66 ticks: 3 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 64} push_addr 64
-  INFO    machine:signal_interruption_controller Interruption                                                                 
-  INFO    machine:signal_interruption_controller Interruption                                                                 
-  DEBUG   machine:simulation    PC: 67 ticks: 10 interruption: True in MEM_OUT: {'opcode': 'load', 'arg': 0} load 0           
-  DEBUG   machine:simulation    PC: 68 ticks: 13 interruption: True in MEM_OUT: {'opcode': 'push', 'arg': 10} push 10         
+  INFO    machine:signal_interruption_controller Interruption
+  INFO    machine:signal_interruption_controller Interruption
+  DEBUG   machine:simulation    PC: 67 ticks: 10 interruption: True in MEM_OUT: {'opcode': 'load', 'arg': 0} load 0
+  DEBUG   machine:simulation    PC: 68 ticks: 13 interruption: True in MEM_OUT: {'opcode': 'push', 'arg': 10} push 10
   INFO    machine:signal_interruption_controller Interruption
   DEBUG   machine:simulation    PC: 69 ticks: 18 interruption: True in MEM_OUT: {'opcode': 'sub', 'arg': 0} sub 0
   DEBUG   machine:simulation    PC: 70 ticks: 20 interruption: True in MEM_OUT: {'opcode': 'di', 'arg': 0} di 0
