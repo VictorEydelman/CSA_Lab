@@ -2,6 +2,8 @@ import sys
 
 from isa import Opcode, write_code
 
+start = 0
+
 
 def translate_stage(text):
     labels = {}
@@ -14,7 +16,8 @@ def translate_stage(text):
             assert token.strip(":") not in labels, "{}".format(token.strip(":"))
             labels[token.strip(":")] = len(code) + 4
             if token.strip(":") == "_start":
-                code.insert(0, {"_start": len(code) + 3})
+                global start
+                start = len(code) + 4
         elif " " in token:
             sub_token = token.split(" ")
             assert len(sub_token) == 2, "{}".format(token)
@@ -29,9 +32,10 @@ def translate_stage(text):
 
 def translate_stage2(labels, code):
     for instruction in code:
-        if "arg" in instruction and instruction["arg"] in labels:
+        if instruction["arg"] in labels:
             label = instruction["arg"]
             instruction["arg"] = labels[label]
+    code.insert(0, {"_start": start})
     return code
 
 
@@ -51,3 +55,4 @@ if __name__ == "__main__":
     assert len(sys.argv) == 3, "Wrong arguments: translator_asm.py <input_file> <target_file>"
     _, sourse, target = sys.argv
     main(sourse, target)
+
