@@ -11,6 +11,7 @@ class Opcode(str, Enum):
     DI = "di"  # 0
     PUSH = "push"  # 1
     PUSH_ADDR = "push_addr"
+    PUSH_BY = "push_by"
     POP = "pop"  # 0
     POP_ADDR = "pop_addr"
     JZ = "jz"  # 2
