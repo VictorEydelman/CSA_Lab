@@ -30,5 +30,5 @@ def test_translator_asm_and_machine(golden, caplog):
             code = file.read()
 
         assert code == golden.out["out_code"]
-        assert stdout.getvalue()[:-1] == golden.out["out_stdout"]
-        assert caplog.text[:-1] == golden.out["out_log"]
+        assert stdout.getvalue() == golden.out["out_stdout"]
+        assert caplog.text == golden.out["out_log"]
