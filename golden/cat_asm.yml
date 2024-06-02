@@ -93,7 +93,7 @@ out_log: |-
   DEBUG   machine:simulation    PC: 29 ticks: 28 interruption: False in MEM_OUT: {'opcode': 'pop', 'arg': 0} pop 0
   DEBUG   machine:simulation    PC: 30 ticks: 30 interruption: False in MEM_OUT: {'opcode': 'push_addr', 'arg': 21} push_addr 21
   DEBUG   machine:simulation    PC: 31 ticks: 34 interruption: False in MEM_OUT: {'opcode': 'inc', 'arg': 0} inc 0
-  DEBUG   machine:simulation    PC: 32 ticks: 36 interruption: False in MEM_OUT: {'opcode': 'pop_addr', 'arg': 21} pop_addr 21  
+  DEBUG   machine:simulation    PC: 32 ticks: 36 interruption: False in MEM_OUT: {'opcode': 'pop_addr', 'arg': 21} pop_addr 21
   DEBUG   machine:simulation    PC: 33 ticks: 40 interruption: False in MEM_OUT: {'opcode': 'jmp', 'arg': 22} jmp 22
   DEBUG   machine:simulation    PC: 22 ticks: 42 interruption: False in MEM_OUT: {'opcode': 'ei', 'arg': 0} ei 0
   DEBUG   machine:simulation    PC: 23 ticks: 45 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 21} push_addr 21
