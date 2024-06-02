@@ -16,14 +16,14 @@ class DataPath:
     tick = None
     interruption = None
     tick_now = None
+    tos = None
+    input_buffer = None
+    output_buffer_str = None
+    output_buffer_int = None
 
     def __init__(self, memory_size, input_token, input_address):
         self.alu = 0
         self.memory = [{"opcode": Opcode.NOP.value, "arg": 0}] * memory_size
-        self.memory[0], self.memory[2] = (
-            {"opcode": Opcode.NOP.value, "arg": ""},
-            {"opcode": Opcode.NOP.value, "arg": ""},
-        )
         self.input_token = input_token
         self.input_address = input_address
         self.ir = {"opcode": Opcode.NOP.value}
@@ -34,26 +34,38 @@ class DataPath:
         self.tick = 0
         self.interruption = True
         self.tick_now = 0
+        self.tos = 0
+        self.input_buffer = []
+        self.output_buffer_str = []
+        self.output_buffer_int = []
 
     def signal_tick(self):
         self.tick += 1
+
+    def signal_tos_pop(self):
+        if self.stack_data:
+            a = self.stack_data.pop()
+            if self.stack_data:
+                self.tos = self.stack_data[-1]
+        return a
+
+    def signal_tos_push(self, arg):
+        self.stack_data.append(arg)
+        self.tos = arg
 
     def interruption_controller(self):
         if self.input_address:
             if self.tick in self.input_address and self.interruption and self.tick <= max(self.input_address):
                 a = self.input_token[self.input_address.index(self.tick)]
-                logging.info("Interruption")
                 self.input_address[self.input_address.index(self.tick)] = 0
-                self.memory[0] = {"opcode": self.memory[0]["opcode"], "arg": self.memory[0]["arg"] + a}
                 self.signal_tick()
-                self.memory[1] = {"opcode": self.memory[0]["opcode"], "arg": ord(a) % (2**32)}
+                logging.info("Interruption")
+                self.input_buffer.append(a)
                 self.signal_tick()
                 self.interruption_controller()
             elif self.tick > max(self.input_address) > 0:
                 self.input_address = [0]
-                self.memory[0] = {"opcode": self.memory[0]["opcode"], "arg": self.memory[0]["arg"] + "\n"}
-                self.signal_tick()
-                self.memory[1] = {"opcode": self.memory[0]["opcode"], "arg": ord("\n") % (2**32)}
+                self.input_buffer.append("\n")
                 self.signal_tick()
 
     def instructions_in_memory(self, code: list):
@@ -61,15 +73,15 @@ class DataPath:
             self.memory[mem["index"]] = {"opcode": mem["opcode"], "arg": mem["arg"]}
 
     def flag(self):
-        if not isinstance(self.alu, str):
-            if self.alu == 0:
-                self.Z = 1
-            else:
-                self.Z = 0
-            if self.alu < 0:
-                self.N = 1
-            else:
-                self.N = 0
+        self.tos = int(self.tos)
+        if self.tos == 0:
+            self.Z = 1
+        else:
+            self.Z = 0
+        if self.tos < 0:
+            self.N = 1
+        else:
+            self.N = 0
 
     def inc_dec(self, operation, left):
         if operation == "inc":
@@ -89,68 +101,53 @@ class DataPath:
         elif operation == "div":
             self.alu = int(right) // int(left)
         elif operation == "swap":
-            self.stack_data.append(right)
+            self.signal_tos_push(right)
             self.signal_tick()
             self.interruption_controller()
-            self.stack_data.append(left)
+            self.signal_tos_push(left)
             self.alu = right
 
     def in_alu_with_memory(self, operation, left, right):
         if operation == "from_memory":
-            self.alu = self.memory[int(left)]["arg"]
-        elif operation == "to_memory":
-            if int(left) != 2:
-                self.alu = int(right)
-                self.memory[int(left)] = {"opcode": self.memory[int(left)]["opcode"], "arg": int(right) % (2**32)}
+            if left == 0:
+                if self.input_buffer:
+                    self.alu = ord(self.input_buffer[int(right)])
+                else:
+                    self.alu = 0
             else:
-                self.alu = str(right)
-                self.memory[int(left)] = {
-                    "opcode": self.memory[int(left)]["opcode"],
-                    "arg": str(self.memory[int(left)]["arg"]) + str(right),
-                }
+                self.alu = self.memory[int(left)]["arg"]
+
+        elif operation == "to_memory":
+            if int(left) == 2:
+                self.output_buffer_str.append(chr(int(right)))
+            elif int(left) == 1:
+                self.output_buffer_int.append(str(right))
+            else:
+                self.alu = int(right)
+                self.memory[int(left)] = {"opcode": self.memory[int(left)]["opcode"], "arg": int(right) % (2 ** 32)}
 
     def in_alu(self, operation, left_sel=None, right_sel=None):
         left = None
         right = None
         if left_sel is not None:
-            left = self.stack_data.pop()
+            left = self.signal_tos_pop()
         if right_sel is not None:
             self.signal_tick()
-            right = self.stack_data.pop()
-        if (
-            operation == "inc"
-            or operation == "dec"
-            or operation == "mul"
-            or operation == "div"
-            or operation == "swap"
-            or operation == "add"
-            or operation == "sub"
-        ):
+            right = self.signal_tos_pop()
+        if operation == "inc" or operation == "dec" or operation == "mul" or operation == "div" or operation == "swap" or operation == "add" or operation == "sub":
             self.operation_in_alu(operation, left, right)
-        elif operation == "store":
-            i = 0
-            symbol = int(self.memory[left + i]["arg"])
-            while symbol != 0:
-                self.signal_tick()
-                self.interruption_controller()
-                self.alu = symbol
-                self.memory[2]["arg"] += chr(symbol)
-                self.signal_tick()
-                self.interruption_controller()
-                i += 1
-                symbol = int(self.memory[left + i]["arg"])
         else:
             self.in_alu_with_memory(operation, left, right)
         self.flag()
 
     def signal_stack(self):
-        self.stack_data.append(self.alu)
+        self.signal_tos_push(self.alu)
 
     def to_stack(self, arg):
-        self.stack_data.append(arg)
+        self.signal_tos_push(int(arg))
 
     def signal_pop(self):
-        self.stack_data.pop()
+        self.signal_tos_pop()
 
     def signal_interruption_ei(self):
         self.interruption = True
@@ -180,7 +177,7 @@ class ControlUnit:
             self.data_path.signal_tick()
             self.data_path.interruption_controller()
         elif opcode == Opcode.DEC:
-            self.data_path.in_alu("inc", left_sel="stack")
+            self.data_path.in_alu("dec", left_sel="stack")
             self.data_path.signal_stack()
             self.data_path.signal_tick()
             self.data_path.interruption_controller()
@@ -227,22 +224,10 @@ class ControlUnit:
             self.data_path.signal_interruption_di()
             self.data_path.signal_tick()
         elif opcode == Opcode.LOAD:
-            self.data_path.signal_tick()
-            self.data_path.interruption_controller()
             self.data_path.to_stack(0)
             self.data_path.signal_tick()
             self.data_path.interruption_controller()
-            self.data_path.in_alu("from_memory", left_sel="stack")
-            self.data_path.signal_stack()
-            self.data_path.signal_tick()
-            self.data_path.interruption_controller()
-        elif opcode == Opcode.LOAD_SYMBOL:
-            self.data_path.signal_tick()
-            self.data_path.interruption_controller()
-            self.data_path.to_stack(1)
-            self.data_path.signal_tick()
-            self.data_path.interruption_controller()
-            self.data_path.in_alu("from_memory", left_sel="stack")
+            self.data_path.in_alu("from_memory", left_sel="stack", right_sel="stack")
             self.data_path.signal_stack()
             self.data_path.signal_tick()
             self.data_path.interruption_controller()
@@ -250,12 +235,13 @@ class ControlUnit:
             self.operation(opcode)
 
     def branching(self, opcode, arg):
+        self.data_path.flag()
         if opcode == Opcode.JMP:
-            self.pc = arg - 1
+            self.pc = int(arg) - 1
             self.data_path.signal_tick()
             self.data_path.interruption_controller()
         elif opcode == Opcode.JZ and self.data_path.Z == 1:
-            self.pc = arg - 1
+            self.pc = int(arg) - 1
             self.data_path.signal_tick()
             self.data_path.interruption_controller()
         elif opcode == Opcode.JNZ and self.data_path.Z == 0:
@@ -288,6 +274,11 @@ class ControlUnit:
             self.data_path.to_stack(arg)
             self.data_path.signal_tick()
             self.data_path.interruption_controller()
+        elif opcode == Opcode.PUSH_BY:
+            self.data_path.in_alu("from_memory", left_sel="stack")
+            self.data_path.signal_stack()
+            self.data_path.signal_tick()
+            self.data_path.interruption_controller()
         elif opcode == Opcode.POP_ADDR:
             self.data_path.signal_tick()
             self.data_path.interruption_controller()
@@ -305,43 +296,29 @@ class ControlUnit:
     def instruction_decoder(self):
         ir = self.data_path.memory[self.pc]
         opcode = ir["opcode"]
-        if (
-            opcode == Opcode.JMP
-            or opcode == Opcode.JZ
-            or opcode == Opcode.JNZ
-            or opcode == Opcode.JN
-            or opcode == Opcode.JNS
-        ):
+        if opcode in {Opcode.JMP, Opcode.JZ, Opcode.JNS, Opcode.JN, Opcode.JNZ}:
             self.branching(opcode, ir["arg"])
         elif opcode == Opcode.HALT:
             raise StopIteration
-        elif opcode == Opcode.PUSH or opcode == Opcode.PUSH_ADDR or opcode == Opcode.POP or opcode == Opcode.POP_ADDR:
+        elif opcode == Opcode.PUSH or opcode == Opcode.PUSH_BY or opcode == Opcode.PUSH_ADDR or opcode == Opcode.POP or opcode == Opcode.POP_ADDR:
             self.push_pop_stack(opcode, ir["arg"])
         elif opcode == Opcode.CALL:
             arg = ir["arg"]
             self.data_path.signal_tick()
             self.data_path.interruption_controller()
             self.stack_return.append(self.pc)
-            self.pc = arg - 1
+            self.pc = int(arg) - 1
             self.data_path.signal_tick()
             self.data_path.interruption_controller()
         elif opcode == Opcode.STORE:
             arg = ir["arg"]
-            if arg != "":
-                self.data_path.to_stack(arg)
-                self.data_path.signal_tick()
-                self.data_path.interruption_controller()
-                self.data_path.in_alu("store", left_sel="stack")
-                self.data_path.signal_tick()
-                self.data_path.interruption_controller()
-            else:
-                self.data_path.to_stack(2)
-                self.data_path.signal_tick()
-                self.data_path.interruption_controller()
-                self.data_path.in_alu("to_memory", left_sel="stack", right_sel="stack")
-                self.data_path.signal_stack()
-                self.data_path.signal_tick()
-                self.data_path.interruption_controller()
+            self.data_path.to_stack(arg)
+            self.data_path.signal_tick()
+            self.data_path.interruption_controller()
+            self.data_path.in_alu("to_memory", left_sel="stack", right_sel="stack")
+            self.data_path.signal_stack()
+            self.data_path.signal_tick()
+            self.data_path.interruption_controller()
         else:
             self.without_arg(opcode)
         self.pc += 1
@@ -368,9 +345,8 @@ def simulation(code, input_token, input_address, memory, limit):
             logging.debug("%s", control_unit)
     except StopIteration:
         pass
-
-    logging.info("output_buffer: %s", repr("".join(str(data_path.memory[2]["arg"]))))
-    return "".join(str(data_path.memory[2]["arg"])), i + 1, data_path.tick
+    logging.info("output_buffer: %s", repr("".join(data_path.output_buffer_str + data_path.output_buffer_int)))
+    return "".join(data_path.output_buffer_str + data_path.output_buffer_int), i + 1, data_path.tick
 
 
 def main(program_file, input_file):
@@ -387,7 +363,7 @@ def main(program_file, input_file):
             input_address.append(input_address[-1])
             input_token.append("\n")
 
-    output, instr, tick = simulation(code, input_token, input_address, 256, 1000)
+    output, instr, tick = simulation(code, input_token, input_address, 512, 1000)
     print("".join(output))
     print("instr_counter:", instr)
     print("ticks:", tick)
@@ -399,3 +375,4 @@ if __name__ == "__main__":
     assert len(sys.argv) == 3, "Wrong arguments: machine.py <input_file> <target_file>"
     _, source, target = sys.argv
     main(source, target)
+
