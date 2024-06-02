@@ -214,7 +214,7 @@ out_log: |-
   INFO    machine:interruption_controller Interruption
   INFO    machine:interruption_controller Interruption
   DEBUG   machine:simulation    PC: 67 ticks: 10 interruption: True in MEM_OUT: {'opcode': 'load', 'arg': ''} load
-  DEBUG   machine:simulation    PC: 68 ticks: 13 interruption: True in MEM_OUT: {'opcode': 'push', 'arg': '10'} push 10       
+  DEBUG   machine:simulation    PC: 68 ticks: 13 interruption: True in MEM_OUT: {'opcode': 'push', 'arg': '10'} push 10
   INFO    machine:interruption_controller Interruption
   DEBUG   machine:simulation    PC: 69 ticks: 18 interruption: True in MEM_OUT: {'opcode': 'sub', 'arg': ''} sub
   DEBUG   machine:simulation    PC: 70 ticks: 20 interruption: True in MEM_OUT: {'opcode': 'di', 'arg': ''} di
