@@ -36,22 +36,70 @@ hello:
     word 44
     word 32
     word 0
+symbol:
+    word sym_out
+print_words:
+    push_addr symbol
+    push_by
+    jz back
+    store 2
+    push_addr symbol
+    inc
+    pop_addr symbol
+    jmp print_words
+back:
+    ret
+print_name:
+    pop
+    push_addr number
+    load
+    store 2
+    push_addr number
+    load
+    push 10
+    sub
+    jz end
+    push_addr number
+    inc
+    pop_addr number
+    jmp print_name
+end:
+    push 1
+    pop_addr number
+    ret
+num:
+    word 0
 _start:
     ei
-    load_symbol
+    push_addr num
+    load
     push 10
     sub
     di
     jz print
+    pop
+    push_addr num
+    inc
+    pop_addr num
     jmp _start
+number:
+    word 0
 print:
-    store sym_out
-    store what
-    store sym_in
-    load
-    store
-    store sym_out
-    store hello
-    load
-    store
+    call print_words
+    push what
+    pop_addr symbol
+    call print_words
+    push sym_in
+    pop_addr symbol
+    call print_words
+    call print_name
+    push sym_out
+    pop_addr symbol
+    call print_words
+    push hello
+    pop_addr symbol
+    call print_words
+    push 0
+    pop_addr number
+    call print_name
     halt
