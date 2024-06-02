@@ -1,5 +1,5 @@
 in_source: |-
-    hello:
+    hello_world:
       word 72
       word 101
       word 108
@@ -12,7 +12,9 @@ in_source: |-
       word 108
       word 100
       word 0
-  _start:
+    symbol:
+      word hello_world
+    _start:
       push_addr symbol
       push_by
       jz end
@@ -21,9 +23,7 @@ in_source: |-
       inc
       pop_addr symbol
       jmp _start
-  symbol:
-      word hello
-  end:
+    end:
       halt
 in_stdin: |-
 
