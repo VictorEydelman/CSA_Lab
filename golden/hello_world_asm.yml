@@ -43,109 +43,109 @@ out_code: |-
   {"index": 15, "opcode": "word", "arg": "0"},
   {"index": 16, "opcode": "word", "arg": 4},
   {"index": 17, "opcode": "push_addr", "arg": 16},
-  {"index": 18, "opcode": "push_by", "arg": ""},
+  {"index": 18, "opcode": "push_by", "arg": 0},
   {"index": 19, "opcode": "jz", "arg": 25},
   {"index": 20, "opcode": "store", "arg": "2"},
   {"index": 21, "opcode": "push_addr", "arg": 16},
-  {"index": 22, "opcode": "inc", "arg": ""},
+  {"index": 22, "opcode": "inc", "arg": 0},
   {"index": 23, "opcode": "pop_addr", "arg": 16},
   {"index": 24, "opcode": "jmp", "arg": 17},
-  {"index": 25, "opcode": "halt", "arg": ""}]
+  {"index": 25, "opcode": "halt", "arg": 0}]
 out_stdout: |-
   Hello World
   instr_counter: 92
   ticks: 181
 out_log: |-
   DEBUG   machine:simulation    PC: 17 ticks: 0 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 16} push_addr 16
-  DEBUG   machine:simulation    PC: 18 ticks: 3 interruption: True in MEM_OUT: {'opcode': 'push_by', 'arg': ''} push_by
-  DEBUG   machine:simulation    PC: 19 ticks: 4 interruption: True in MEM_OUT: {'opcode': 'jz', 'arg': 25} jz 25
-  DEBUG   machine:simulation    PC: 20 ticks: 4 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': '2'} store 2
+  DEBUG   machine:simulation    PC: 18 ticks: 3 interruption: True in MEM_OUT: {'opcode': 'push_by', 'arg': 0} push_by 0      
+  DEBUG   machine:simulation    PC: 19 ticks: 4 interruption: True in MEM_OUT: {'opcode': 'jz', 'arg': 25} jz 25              
+  DEBUG   machine:simulation    PC: 20 ticks: 4 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': 2} store 2          
   DEBUG   machine:simulation    PC: 21 ticks: 7 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 16} push_addr 16
-  DEBUG   machine:simulation    PC: 22 ticks: 10 interruption: True in MEM_OUT: {'opcode': 'inc', 'arg': ''} inc
-  DEBUG   machine:simulation    PC: 23 ticks: 11 interruption: True in MEM_OUT: {'opcode': 'pop_addr', 'arg': 16} pop_addr 16
-  DEBUG   machine:simulation    PC: 24 ticks: 15 interruption: True in MEM_OUT: {'opcode': 'jmp', 'arg': 17} jmp 17
+  DEBUG   machine:simulation    PC: 22 ticks: 10 interruption: True in MEM_OUT: {'opcode': 'inc', 'arg': 0} inc 0             
+  DEBUG   machine:simulation    PC: 23 ticks: 11 interruption: True in MEM_OUT: {'opcode': 'pop_addr', 'arg': 16} pop_addr 16 
+  DEBUG   machine:simulation    PC: 24 ticks: 15 interruption: True in MEM_OUT: {'opcode': 'jmp', 'arg': 17} jmp 17           
   DEBUG   machine:simulation    PC: 17 ticks: 16 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 16} push_addr 16
-  DEBUG   machine:simulation    PC: 18 ticks: 19 interruption: True in MEM_OUT: {'opcode': 'push_by', 'arg': ''} push_by
+  DEBUG   machine:simulation    PC: 18 ticks: 19 interruption: True in MEM_OUT: {'opcode': 'push_by', 'arg': 0} push_by 0
   DEBUG   machine:simulation    PC: 19 ticks: 20 interruption: True in MEM_OUT: {'opcode': 'jz', 'arg': 25} jz 25
-  DEBUG   machine:simulation    PC: 20 ticks: 20 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': '2'} store 2
+  DEBUG   machine:simulation    PC: 20 ticks: 20 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': 2} store 2
   DEBUG   machine:simulation    PC: 21 ticks: 23 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 16} push_addr 16
-  DEBUG   machine:simulation    PC: 22 ticks: 26 interruption: True in MEM_OUT: {'opcode': 'inc', 'arg': ''} inc
+  DEBUG   machine:simulation    PC: 22 ticks: 26 interruption: True in MEM_OUT: {'opcode': 'inc', 'arg': 0} inc 0
   DEBUG   machine:simulation    PC: 23 ticks: 27 interruption: True in MEM_OUT: {'opcode': 'pop_addr', 'arg': 16} pop_addr 16
   DEBUG   machine:simulation    PC: 24 ticks: 31 interruption: True in MEM_OUT: {'opcode': 'jmp', 'arg': 17} jmp 17
   DEBUG   machine:simulation    PC: 17 ticks: 32 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 16} push_addr 16
-  DEBUG   machine:simulation    PC: 18 ticks: 35 interruption: True in MEM_OUT: {'opcode': 'push_by', 'arg': ''} push_by
+  DEBUG   machine:simulation    PC: 18 ticks: 35 interruption: True in MEM_OUT: {'opcode': 'push_by', 'arg': 0} push_by 0
   DEBUG   machine:simulation    PC: 19 ticks: 36 interruption: True in MEM_OUT: {'opcode': 'jz', 'arg': 25} jz 25
-  DEBUG   machine:simulation    PC: 20 ticks: 36 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': '2'} store 2
+  DEBUG   machine:simulation    PC: 20 ticks: 36 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': 2} store 2
   DEBUG   machine:simulation    PC: 21 ticks: 39 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 16} push_addr 16
-  DEBUG   machine:simulation    PC: 22 ticks: 42 interruption: True in MEM_OUT: {'opcode': 'inc', 'arg': ''} inc
+  DEBUG   machine:simulation    PC: 22 ticks: 42 interruption: True in MEM_OUT: {'opcode': 'inc', 'arg': 0} inc 0
   DEBUG   machine:simulation    PC: 23 ticks: 43 interruption: True in MEM_OUT: {'opcode': 'pop_addr', 'arg': 16} pop_addr 16
   DEBUG   machine:simulation    PC: 24 ticks: 47 interruption: True in MEM_OUT: {'opcode': 'jmp', 'arg': 17} jmp 17
   DEBUG   machine:simulation    PC: 17 ticks: 48 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 16} push_addr 16
-  DEBUG   machine:simulation    PC: 18 ticks: 51 interruption: True in MEM_OUT: {'opcode': 'push_by', 'arg': ''} push_by
+  DEBUG   machine:simulation    PC: 18 ticks: 51 interruption: True in MEM_OUT: {'opcode': 'push_by', 'arg': 0} push_by 0
   DEBUG   machine:simulation    PC: 19 ticks: 52 interruption: True in MEM_OUT: {'opcode': 'jz', 'arg': 25} jz 25
-  DEBUG   machine:simulation    PC: 20 ticks: 52 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': '2'} store 2
+  DEBUG   machine:simulation    PC: 20 ticks: 52 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': 2} store 2
   DEBUG   machine:simulation    PC: 21 ticks: 55 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 16} push_addr 16
-  DEBUG   machine:simulation    PC: 22 ticks: 58 interruption: True in MEM_OUT: {'opcode': 'inc', 'arg': ''} inc
+  DEBUG   machine:simulation    PC: 22 ticks: 58 interruption: True in MEM_OUT: {'opcode': 'inc', 'arg': 0} inc 0
   DEBUG   machine:simulation    PC: 23 ticks: 59 interruption: True in MEM_OUT: {'opcode': 'pop_addr', 'arg': 16} pop_addr 16
   DEBUG   machine:simulation    PC: 24 ticks: 63 interruption: True in MEM_OUT: {'opcode': 'jmp', 'arg': 17} jmp 17
   DEBUG   machine:simulation    PC: 17 ticks: 64 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 16} push_addr 16
-  DEBUG   machine:simulation    PC: 18 ticks: 67 interruption: True in MEM_OUT: {'opcode': 'push_by', 'arg': ''} push_by
+  DEBUG   machine:simulation    PC: 18 ticks: 67 interruption: True in MEM_OUT: {'opcode': 'push_by', 'arg': 0} push_by 0
   DEBUG   machine:simulation    PC: 19 ticks: 68 interruption: True in MEM_OUT: {'opcode': 'jz', 'arg': 25} jz 25
-  DEBUG   machine:simulation    PC: 20 ticks: 68 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': '2'} store 2
+  DEBUG   machine:simulation    PC: 20 ticks: 68 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': 2} store 2
   DEBUG   machine:simulation    PC: 21 ticks: 71 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 16} push_addr 16
-  DEBUG   machine:simulation    PC: 22 ticks: 74 interruption: True in MEM_OUT: {'opcode': 'inc', 'arg': ''} inc
+  DEBUG   machine:simulation    PC: 22 ticks: 74 interruption: True in MEM_OUT: {'opcode': 'inc', 'arg': 0} inc 0
   DEBUG   machine:simulation    PC: 23 ticks: 75 interruption: True in MEM_OUT: {'opcode': 'pop_addr', 'arg': 16} pop_addr 16
   DEBUG   machine:simulation    PC: 24 ticks: 79 interruption: True in MEM_OUT: {'opcode': 'jmp', 'arg': 17} jmp 17
   DEBUG   machine:simulation    PC: 17 ticks: 80 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 16} push_addr 16
-  DEBUG   machine:simulation    PC: 18 ticks: 83 interruption: True in MEM_OUT: {'opcode': 'push_by', 'arg': ''} push_by
+  DEBUG   machine:simulation    PC: 18 ticks: 83 interruption: True in MEM_OUT: {'opcode': 'push_by', 'arg': 0} push_by 0
   DEBUG   machine:simulation    PC: 19 ticks: 84 interruption: True in MEM_OUT: {'opcode': 'jz', 'arg': 25} jz 25
-  DEBUG   machine:simulation    PC: 20 ticks: 84 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': '2'} store 2
+  DEBUG   machine:simulation    PC: 20 ticks: 84 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': 2} store 2
   DEBUG   machine:simulation    PC: 21 ticks: 87 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 16} push_addr 16
-  DEBUG   machine:simulation    PC: 22 ticks: 90 interruption: True in MEM_OUT: {'opcode': 'inc', 'arg': ''} inc
+  DEBUG   machine:simulation    PC: 22 ticks: 90 interruption: True in MEM_OUT: {'opcode': 'inc', 'arg': 0} inc 0
   DEBUG   machine:simulation    PC: 23 ticks: 91 interruption: True in MEM_OUT: {'opcode': 'pop_addr', 'arg': 16} pop_addr 16
   DEBUG   machine:simulation    PC: 24 ticks: 95 interruption: True in MEM_OUT: {'opcode': 'jmp', 'arg': 17} jmp 17
   DEBUG   machine:simulation    PC: 17 ticks: 96 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 16} push_addr 16
-  DEBUG   machine:simulation    PC: 18 ticks: 99 interruption: True in MEM_OUT: {'opcode': 'push_by', 'arg': ''} push_by
+  DEBUG   machine:simulation    PC: 18 ticks: 99 interruption: True in MEM_OUT: {'opcode': 'push_by', 'arg': 0} push_by 0
   DEBUG   machine:simulation    PC: 19 ticks: 100 interruption: True in MEM_OUT: {'opcode': 'jz', 'arg': 25} jz 25
-  DEBUG   machine:simulation    PC: 20 ticks: 100 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': '2'} store 2
+  DEBUG   machine:simulation    PC: 20 ticks: 100 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': 2} store 2
   DEBUG   machine:simulation    PC: 21 ticks: 103 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 16} push_addr 16
-  DEBUG   machine:simulation    PC: 22 ticks: 106 interruption: True in MEM_OUT: {'opcode': 'inc', 'arg': ''} inc
+  DEBUG   machine:simulation    PC: 22 ticks: 106 interruption: True in MEM_OUT: {'opcode': 'inc', 'arg': 0} inc 0
   DEBUG   machine:simulation    PC: 23 ticks: 107 interruption: True in MEM_OUT: {'opcode': 'pop_addr', 'arg': 16} pop_addr 16
   DEBUG   machine:simulation    PC: 24 ticks: 111 interruption: True in MEM_OUT: {'opcode': 'jmp', 'arg': 17} jmp 17
   DEBUG   machine:simulation    PC: 17 ticks: 112 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 16} push_addr 16
-  DEBUG   machine:simulation    PC: 18 ticks: 115 interruption: True in MEM_OUT: {'opcode': 'push_by', 'arg': ''} push_by
+  DEBUG   machine:simulation    PC: 18 ticks: 115 interruption: True in MEM_OUT: {'opcode': 'push_by', 'arg': 0} push_by 0
   DEBUG   machine:simulation    PC: 19 ticks: 116 interruption: True in MEM_OUT: {'opcode': 'jz', 'arg': 25} jz 25
-  DEBUG   machine:simulation    PC: 20 ticks: 116 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': '2'} store 2
+  DEBUG   machine:simulation    PC: 20 ticks: 116 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': 2} store 2
   DEBUG   machine:simulation    PC: 21 ticks: 119 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 16} push_addr 16
-  DEBUG   machine:simulation    PC: 22 ticks: 122 interruption: True in MEM_OUT: {'opcode': 'inc', 'arg': ''} inc
+  DEBUG   machine:simulation    PC: 22 ticks: 122 interruption: True in MEM_OUT: {'opcode': 'inc', 'arg': 0} inc 0
   DEBUG   machine:simulation    PC: 23 ticks: 123 interruption: True in MEM_OUT: {'opcode': 'pop_addr', 'arg': 16} pop_addr 16
   DEBUG   machine:simulation    PC: 24 ticks: 127 interruption: True in MEM_OUT: {'opcode': 'jmp', 'arg': 17} jmp 17
   DEBUG   machine:simulation    PC: 17 ticks: 128 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 16} push_addr 16
-  DEBUG   machine:simulation    PC: 18 ticks: 131 interruption: True in MEM_OUT: {'opcode': 'push_by', 'arg': ''} push_by
+  DEBUG   machine:simulation    PC: 18 ticks: 131 interruption: True in MEM_OUT: {'opcode': 'push_by', 'arg': 0} push_by 0
   DEBUG   machine:simulation    PC: 19 ticks: 132 interruption: True in MEM_OUT: {'opcode': 'jz', 'arg': 25} jz 25
-  DEBUG   machine:simulation    PC: 20 ticks: 132 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': '2'} store 2
+  DEBUG   machine:simulation    PC: 20 ticks: 132 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': 2} store 2
   DEBUG   machine:simulation    PC: 21 ticks: 135 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 16} push_addr 16
-  DEBUG   machine:simulation    PC: 22 ticks: 138 interruption: True in MEM_OUT: {'opcode': 'inc', 'arg': ''} inc
+  DEBUG   machine:simulation    PC: 22 ticks: 138 interruption: True in MEM_OUT: {'opcode': 'inc', 'arg': 0} inc 0
   DEBUG   machine:simulation    PC: 23 ticks: 139 interruption: True in MEM_OUT: {'opcode': 'pop_addr', 'arg': 16} pop_addr 16
   DEBUG   machine:simulation    PC: 24 ticks: 143 interruption: True in MEM_OUT: {'opcode': 'jmp', 'arg': 17} jmp 17
   DEBUG   machine:simulation    PC: 17 ticks: 144 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 16} push_addr 16
-  DEBUG   machine:simulation    PC: 18 ticks: 147 interruption: True in MEM_OUT: {'opcode': 'push_by', 'arg': ''} push_by
+  DEBUG   machine:simulation    PC: 18 ticks: 147 interruption: True in MEM_OUT: {'opcode': 'push_by', 'arg': 0} push_by 0
   DEBUG   machine:simulation    PC: 19 ticks: 148 interruption: True in MEM_OUT: {'opcode': 'jz', 'arg': 25} jz 25
-  DEBUG   machine:simulation    PC: 20 ticks: 148 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': '2'} store 2
+  DEBUG   machine:simulation    PC: 20 ticks: 148 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': 2} store 2
   DEBUG   machine:simulation    PC: 21 ticks: 151 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 16} push_addr 16
-  DEBUG   machine:simulation    PC: 22 ticks: 154 interruption: True in MEM_OUT: {'opcode': 'inc', 'arg': ''} inc
+  DEBUG   machine:simulation    PC: 22 ticks: 154 interruption: True in MEM_OUT: {'opcode': 'inc', 'arg': 0} inc 0
   DEBUG   machine:simulation    PC: 23 ticks: 155 interruption: True in MEM_OUT: {'opcode': 'pop_addr', 'arg': 16} pop_addr 16
   DEBUG   machine:simulation    PC: 24 ticks: 159 interruption: True in MEM_OUT: {'opcode': 'jmp', 'arg': 17} jmp 17
   DEBUG   machine:simulation    PC: 17 ticks: 160 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 16} push_addr 16
-  DEBUG   machine:simulation    PC: 18 ticks: 163 interruption: True in MEM_OUT: {'opcode': 'push_by', 'arg': ''} push_by
+  DEBUG   machine:simulation    PC: 18 ticks: 163 interruption: True in MEM_OUT: {'opcode': 'push_by', 'arg': 0} push_by 0
   DEBUG   machine:simulation    PC: 19 ticks: 164 interruption: True in MEM_OUT: {'opcode': 'jz', 'arg': 25} jz 25
-  DEBUG   machine:simulation    PC: 20 ticks: 164 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': '2'} store 2
+  DEBUG   machine:simulation    PC: 20 ticks: 164 interruption: True in MEM_OUT: {'opcode': 'store', 'arg': 2} store 2
   DEBUG   machine:simulation    PC: 21 ticks: 167 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 16} push_addr 16
-  DEBUG   machine:simulation    PC: 22 ticks: 170 interruption: True in MEM_OUT: {'opcode': 'inc', 'arg': ''} inc
+  DEBUG   machine:simulation    PC: 22 ticks: 170 interruption: True in MEM_OUT: {'opcode': 'inc', 'arg': 0} inc 0
   DEBUG   machine:simulation    PC: 23 ticks: 171 interruption: True in MEM_OUT: {'opcode': 'pop_addr', 'arg': 16} pop_addr 16
   DEBUG   machine:simulation    PC: 24 ticks: 175 interruption: True in MEM_OUT: {'opcode': 'jmp', 'arg': 17} jmp 17
   DEBUG   machine:simulation    PC: 17 ticks: 176 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 16} push_addr 16
-  DEBUG   machine:simulation    PC: 18 ticks: 179 interruption: True in MEM_OUT: {'opcode': 'push_by', 'arg': ''} push_by
+  DEBUG   machine:simulation    PC: 18 ticks: 179 interruption: True in MEM_OUT: {'opcode': 'push_by', 'arg': 0} push_by 0
   DEBUG   machine:simulation    PC: 19 ticks: 180 interruption: True in MEM_OUT: {'opcode': 'jz', 'arg': 25} jz 25
-  DEBUG   machine:simulation    PC: 25 ticks: 181 interruption: True in MEM_OUT: {'opcode': 'halt', 'arg': ''} halt
+  DEBUG   machine:simulation    PC: 25 ticks: 181 interruption: True in MEM_OUT: {'opcode': 'halt', 'arg': 0} halt 0
   INFO    machine:simulation    output_buffer: 'Hello World'
