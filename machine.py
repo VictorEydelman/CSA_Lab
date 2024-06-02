@@ -124,7 +124,7 @@ class DataPath:
                 self.output_buffer_int.append(str(right))
             else:
                 self.alu = int(right)
-                self.memory[int(left)] = {"opcode": self.memory[int(left)]["opcode"], "arg": int(right) % (2 ** 32)}
+                self.memory[int(left)] = {"opcode": self.memory[int(left)]["opcode"], "arg": int(right) % (2**32)}
 
     def in_alu(self, operation, left_sel=None, right_sel=None):
         left = None
@@ -134,7 +134,15 @@ class DataPath:
         if right_sel is not None:
             self.signal_tick()
             right = self.signal_tos_pop()
-        if operation == "inc" or operation == "dec" or operation == "mul" or operation == "div" or operation == "swap" or operation == "add" or operation == "sub":
+        if (
+            operation == "inc"
+            or operation == "dec"
+            or operation == "mul"
+            or operation == "div"
+            or operation == "swap"
+            or operation == "add"
+            or operation == "sub"
+        ):
             self.operation_in_alu(operation, left, right)
         else:
             self.in_alu_with_memory(operation, left, right)
@@ -300,7 +308,13 @@ class ControlUnit:
             self.branching(opcode, ir["arg"])
         elif opcode == Opcode.HALT:
             raise StopIteration
-        elif opcode == Opcode.PUSH or opcode == Opcode.PUSH_BY or opcode == Opcode.PUSH_ADDR or opcode == Opcode.POP or opcode == Opcode.POP_ADDR:
+        elif (
+            opcode == Opcode.PUSH
+            or opcode == Opcode.PUSH_BY
+            or opcode == Opcode.PUSH_ADDR
+            or opcode == Opcode.POP
+            or opcode == Opcode.POP_ADDR
+        ):
             self.push_pop_stack(opcode, ir["arg"])
         elif opcode == Opcode.CALL:
             arg = ir["arg"]
