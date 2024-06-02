@@ -78,6 +78,7 @@ out_stdout: |-
   
   instr_counter: 121
   ticks: 374
+  
 out_log: |-
   DEBUG   machine:simulation    PC: 22 ticks: 0 interruption: True in MEM_OUT: {'opcode': 'ei', 'arg': 0} ei 0
   INFO    machine:signal_interruption_controller Interruption
@@ -205,3 +206,4 @@ out_log: |-
   DEBUG   machine:simulation    PC: 20 ticks: 371 interruption: False in MEM_OUT: {'opcode': 'ret', 'arg': 0} ret 0
   DEBUG   machine:simulation    PC: 35 ticks: 373 interruption: False in MEM_OUT: {'opcode': 'halt', 'arg': 0} halt 0
   INFO    machine:simulation    output_buffer: 'Viko\n'
+  
