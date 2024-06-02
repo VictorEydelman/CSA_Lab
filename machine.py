@@ -82,6 +82,12 @@ class DataPath:
         else:
             self.N = 0
 
+    def checking_the_number(self):
+        if self.alu <= -(2 ** 31):
+            self.alu = self.alu + 2 ** 32
+        if self.alu >= 2 ** 31:
+            self.alu = self.alu - 2 ** 32
+
     def operation_in_alu(self, operation, left, right):
         if operation == "inc":
             self.alu = left + 1
@@ -95,24 +101,7 @@ class DataPath:
             self.alu = left * right
         elif operation == "div":
             self.alu = right // left
-        elif operation == "swap":
-            self.signal_tos_push(right)
-            self.signal_tick()
-            self.signal_interruption_controller()
-            self.signal_tos_push(left)
-            self.alu = right
-        else:
-            self.signal_tos_push(left)
-            self.signal_tick()
-            self.signal_interruption_controller()
-            self.signal_tos_push(left)
-            self.signal_tick()
-            self.signal_interruption_controller()
-        if operation != "swap" and operation != "dup":
-            if self.alu <= -(2**31):
-                self.alu = self.alu + 2**32
-            if self.alu >= 2**31:
-                self.alu = self.alu - 2**32
+        self.checking_the_number()
 
     def in_alu_with_memory(self, operation, left, right):
         if operation == "from_memory":
@@ -131,11 +120,8 @@ class DataPath:
                 self.output_buffer_int.append(str(right))
             else:
                 self.alu = right
-                if self.alu <= -(2**31):
-                    self.alu = self.alu + 2**32
-                if self.alu >= 2**31:
-                    self.alu = self.alu - 2**32
-                self.memory[left] = {"opcode": self.memory[left]["opcode"], "arg": self.alu % (2**32)}
+                self.checking_the_number()
+                self.memory[left] = {"opcode": self.memory[left]["opcode"], "arg": self.alu % (2 ** 32)}
 
     def in_alu(self, operation, left_sel=None, right_sel=None):
         left = None
@@ -145,24 +131,34 @@ class DataPath:
         if right_sel is not None:
             self.signal_tick()
             right = self.signal_tos_pop()
-        if operation in {"inc", "dec", "mul", "div", "swap", "add", "sub", "dup"}:
+        if operation in {"inc", "dec", "mul", "div", "add", "sub"}:
             self.operation_in_alu(operation, left, right)
+        elif operation == "swap":
+            self.signal_tos_push(right)
+            self.signal_tick()
+            self.signal_interruption_controller()
+            self.signal_tos_push(left)
+            self.alu = right
+        elif operation == "dup":
+            self.signal_tos_push(left)
+            self.signal_tick()
+            self.signal_interruption_controller()
+            self.signal_tos_push(left)
+            self.signal_tick()
+            self.signal_interruption_controller()
         else:
             self.in_alu_with_memory(operation, left, right)
         self.flag()
 
     def signal_stack(self):
-        if self.alu <= -(2**31):
-            self.alu = self.alu + 2**32
-        if self.alu >= 2**31:
-            self.alu = self.alu - 2**32
+        self.checking_the_number()
         self.signal_tos_push(self.alu)
 
     def to_stack(self, arg):
-        if arg <= -(2**31):
-            arg = arg + 2**32
-        if arg >= 2**31:
-            arg = arg - 2**32
+        if arg <= -(2 ** 31):
+            arg = arg + 2 ** 32
+        if arg >= 2 ** 31:
+            arg = arg - 2 ** 32
         self.signal_tos_push(arg)
 
     def signal_pop(self):
@@ -213,10 +209,6 @@ class ControlUnit:
             self.data_path.signal_stack()
             self.data_path.signal_tick()
             self.data_path.signal_interruption_controller()
-        elif opcode == Opcode.DUP:
-            self.data_path.in_alu("dup", left_sel="stack")
-            self.data_path.signal_tick()
-            self.data_path.signal_interruption_controller()
         elif opcode == Opcode.ADD:
             self.data_path.in_alu("add", left_sel="stack", right_sel="stack")
             self.data_path.signal_stack()
@@ -237,7 +229,7 @@ class ControlUnit:
             self.data_path.signal_stack()
             self.data_path.signal_tick()
             self.data_path.signal_interruption_controller()
-        elif opcode == Opcode.SWAP:
+        else:
             self.data_path.in_alu("swap", left_sel="stack", right_sel="stack")
             self.data_path.signal_stack()
             self.data_path.signal_tick()
@@ -261,6 +253,10 @@ class ControlUnit:
             self.data_path.signal_interruption_controller()
             self.data_path.in_alu("from_memory", left_sel="stack", right_sel="stack")
             self.data_path.signal_stack()
+            self.data_path.signal_tick()
+            self.data_path.signal_interruption_controller()
+        elif opcode == Opcode.DUP:
+            self.data_path.in_alu("dup", left_sel="stack")
             self.data_path.signal_tick()
             self.data_path.signal_interruption_controller()
         else:
