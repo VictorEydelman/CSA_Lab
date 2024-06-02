@@ -172,7 +172,7 @@ class ControlUnit:
 
     def __init__(self, code, data_path):
         self.data_path = data_path
-        self.pc = int(code[0]["_start"]) + 1
+        self.pc = int(code[0]["_start"])
         del code[0]
         self.stack_return = []
         data_path.instructions_in_memory(code)
@@ -353,6 +353,7 @@ def simulation(code, input_token, input_address, memory, limit):
     data_path = DataPath(memory, input_token, input_address)
     control_unit = ControlUnit(code, data_path)
     i = 0
+    logging.debug("%s", control_unit)
     try:
         for i in range(limit):
             control_unit.instruction_decoder()
