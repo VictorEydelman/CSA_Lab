@@ -281,6 +281,8 @@ class ControlUnit:
             self.data_path.signal_tick()
             self.data_path.signal_interruption_controller()
             self.data_path.in_alu("from_memory", left_sel="stack", right_sel="stack")
+            self.data_path.signal_tick()
+            self.data_path.signal_interruption_controller()
             self.data_path.signal_stack()
             self.data_path.signal_tick()
             self.data_path.signal_interruption_controller()
@@ -389,8 +391,6 @@ class ControlUnit:
             self.data_path.signal_interruption_controller()
         elif opcode == Opcode.STORE:
             arg = ir["arg"]
-            self.data_path.signal_tick()
-            self.data_path.signal_interruption_controller()
             self.data_path.to_stack(arg)
             self.data_path.signal_tick()
             self.data_path.signal_interruption_controller()
