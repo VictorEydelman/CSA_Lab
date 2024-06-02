@@ -80,11 +80,11 @@ out_stdout: |-
   ticks: 227
 out_log: |-
   DEBUG   machine:simulation    PC: 23 ticks: 0 interruption: True in MEM_OUT: {'opcode': 'ei', 'arg': ''} ei
-  INFO    machine:interruption_controller Interruption                                                                        
+  INFO    machine:interruption_controller Interruption
   DEBUG   machine:simulation    PC: 24 ticks: 3 interruption: True in MEM_OUT: {'opcode': 'push_addr', 'arg': 21} push_addr 21
-  INFO    machine:interruption_controller Interruption                                                                        
-  INFO    machine:interruption_controller Interruption                                                                        
-  DEBUG   machine:simulation    PC: 25 ticks: 10 interruption: True in MEM_OUT: {'opcode': 'load', 'arg': ''} load            
+  INFO    machine:interruption_controller Interruption
+  INFO    machine:interruption_controller Interruption
+  DEBUG   machine:simulation    PC: 25 ticks: 10 interruption: True in MEM_OUT: {'opcode': 'load', 'arg': ''} load
   DEBUG   machine:simulation    PC: 26 ticks: 13 interruption: True in MEM_OUT: {'opcode': 'push', 'arg': '10'} push 10
   INFO    machine:interruption_controller Interruption
   DEBUG   machine:simulation    PC: 27 ticks: 18 interruption: True in MEM_OUT: {'opcode': 'sub', 'arg': ''} sub
