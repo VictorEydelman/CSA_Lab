@@ -400,8 +400,20 @@ class ControlUnit:
             self.data_path.signal_stack()
             self.data_path.signal_tick()
             self.data_path.signal_interruption_controller()
-        elif opcode in {Opcode.RET, Opcode.EI, Opcode.DI, Opcode.LOAD, Opcode.DUP, Opcode.INC, Opcode.DEC, Opcode.ADD,
-                        Opcode.SUB, Opcode.MUL, Opcode.DIV, Opcode.SWAP}:
+        elif opcode in {
+            Opcode.RET,
+            Opcode.EI,
+            Opcode.DI,
+            Opcode.LOAD,
+            Opcode.DUP,
+            Opcode.INC,
+            Opcode.DEC,
+            Opcode.ADD,
+            Opcode.SUB,
+            Opcode.MUL,
+            Opcode.DIV,
+            Opcode.SWAP,
+        }:
             self.without_arg(opcode)
         self.pc += 1
         return ""
