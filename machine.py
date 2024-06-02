@@ -70,10 +70,7 @@ class DataPath:
 
     def instructions_in_memory(self, code: list):
         for mem in code:
-            if mem["arg"] == "":
-                self.memory[mem["index"]] = {"opcode": mem["opcode"], "arg": 0}
-            else:
-                self.memory[mem["index"]] = {"opcode": mem["opcode"], "arg": int(mem["arg"])}
+            self.memory[mem["index"]] = {"opcode": mem["opcode"], "arg": int(mem["arg"])}
 
     def flag(self):
         if self.tos == 0:
