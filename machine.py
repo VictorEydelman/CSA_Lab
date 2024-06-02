@@ -455,8 +455,6 @@ def main(program_file, input_file):
             for num, char in t:
                 input_address.append(num)
                 input_token.append(char)
-            input_address.append(input_address[-1])
-            input_token.append("\n")
 
     output, instr, tick = simulation(code, input_token, input_address, 256, 1000)
     print("".join(output))
