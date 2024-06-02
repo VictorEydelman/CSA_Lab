@@ -24,7 +24,6 @@ def translate_stage(text):
         else:
             opcode = Opcode(token)
             code.append({"index": len(code) + 4, "opcode": opcode, "arg": ""})
-
     return labels, code
 
 
