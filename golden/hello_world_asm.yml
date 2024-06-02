@@ -1,5 +1,5 @@
 in_source: |-
-    hello_world:
+    hello:
       word 72
       word 101
       word 108
@@ -13,7 +13,7 @@ in_source: |-
       word 100
       word 0
   symbol:
-      word hello_world
+      word hello
   _start:
       push_addr symbol
       push_by
