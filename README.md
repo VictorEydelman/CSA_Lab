@@ -171,8 +171,8 @@ jn | 2 | переход на указанную метку, если флаг 'N
 jns | 2 | переход на указанную метку, если флаг 'N' равен 0
 call | 3 | переход на подпрограмму по указанной метке, PC записывается в стек возврата
 ret | 2 | возврат из подпрограммы, восстановление PC из стека
-load | 4 | выгрузка из input_buffer в стек
-store | 4 | загрузка в конец output_buffer_str или output_buffer_int данных находящихся в стеке, выбор между буфферами посуществляется по аргументу, если 1, output_buffer_int, если 2, то output_buffer_int
+load | 5 | выгрузка из input_buffer в стек
+store | 5 | загрузка в конец output_buffer_str или output_buffer_int данных находящихся в стеке, выбор между буфферами посуществляется по аргументу, если 1, output_buffer_int, если 2, то output_buffer_int
 word | 0 | определить указаное число в память.
 halt | 1 | остановить процессор
 
@@ -572,7 +572,7 @@ golden_test.py::test_translator_asm_and_machine[golden/cat_asm.yml] PASSED [100%
 
 ```text
 | ФИО                         |алг           |LoC|code инстр|инстр|такт|                                   вариант                                  |
-| Эйдельман Виктор Аркадьевич |cat           |38 |    33    | 121 |256 | (asm | stack | neum | hw | instr | struct | trap | mem | cstr | prob2 | -) |
-| Эйдельман Виктор Аркадьевич |hello_world   |26 |    21    | 92  |181 | (asm | stack | neum | hw | instr | struct | trap | mem | cstr | prob2 | -) |
-| Эйдельман Виктор Аркадьевич |hello_username|105|    93    | 477 |987 | (asm | stack | neum | hw | instr | struct | trap | mem | cstr | prob2 | -) |
+| Эйдельман Виктор Аркадьевич |cat           |38 |    33    | 121 |374 | (asm | stack | neum | hw | instr | struct | trap | mem | cstr | prob2 | -) |
+| Эйдельман Виктор Аркадьевич |hello_world   |26 |    21    | 92  |286 | (asm | stack | neum | hw | instr | struct | trap | mem | cstr | prob2 | -) |
+| Эйдельман Виктор Аркадьевич |hello_username|105|    93    | 477 |1490 | (asm | stack | neum | hw | instr | struct | trap | mem | cstr | prob2 | -) |
 ```
