@@ -83,10 +83,10 @@ class DataPath:
             self.N = 0
 
     def checking_the_number(self):
-        if self.alu <= -(2 ** 31):
-            self.alu = self.alu + 2 ** 32
-        if self.alu >= 2 ** 31:
-            self.alu = self.alu - 2 ** 32
+        if self.alu <= -(2**31):
+            self.alu = self.alu + 2**32
+        if self.alu >= 2**31:
+            self.alu = self.alu - 2**32
 
     def operation_in_alu(self, operation, left, right):
         if operation == "inc":
@@ -121,7 +121,7 @@ class DataPath:
             else:
                 self.alu = right
                 self.checking_the_number()
-                self.memory[left] = {"opcode": self.memory[left]["opcode"], "arg": self.alu % (2 ** 32)}
+                self.memory[left] = {"opcode": self.memory[left]["opcode"], "arg": self.alu % (2**32)}
 
     def in_alu(self, operation, left_sel=None, right_sel=None):
         left = None
@@ -155,10 +155,10 @@ class DataPath:
         self.signal_tos_push(self.alu)
 
     def to_stack(self, arg):
-        if arg <= -(2 ** 31):
-            arg = arg + 2 ** 32
-        if arg >= 2 ** 31:
-            arg = arg - 2 ** 32
+        if arg <= -(2**31):
+            arg = arg + 2**32
+        if arg >= 2**31:
+            arg = arg - 2**32
         self.signal_tos_push(arg)
 
     def signal_pop(self):
