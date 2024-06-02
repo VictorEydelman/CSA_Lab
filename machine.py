@@ -92,34 +92,34 @@ class DataPath:
     def operation_in_alu(self, operation, left, right):
         if operation == "inc" or operation == "dec":
             self.inc_dec(operation, left)
-            if int(self.alu) <= -2 ** 31:
-                self.alu = int(self.alu) + 2 ** 32
-            if int(self.alu) >= 2 ** 31:
-                self.alu = int(self.alu) - 2 ** 32
+            if int(self.alu) <= -(2**31):
+                self.alu = int(self.alu) + 2**32
+            if int(self.alu) >= 2**31:
+                self.alu = int(self.alu) - 2**32
         elif operation == "add":
             self.alu = int(left) + int(right)
-            if int(self.alu) <= -2 ** 31:
-                self.alu = int(self.alu) + 2 ** 32
-            if int(self.alu) >= 2 ** 31:
-                self.alu = int(self.alu) - 2 ** 32
+            if int(self.alu) <= -(2**31):
+                self.alu = int(self.alu) + 2**32
+            if int(self.alu) >= 2**31:
+                self.alu = int(self.alu) - 2**32
         elif operation == "sub":
             self.alu = int(right) - int(left)
-            if int(self.alu) <= -2 ** 31:
-                self.alu = int(self.alu) + 2 ** 32
-            if int(self.alu) >= 2 ** 31:
-                self.alu = int(self.alu) - 2 ** 32
+            if int(self.alu) <= -(2**31):
+                self.alu = int(self.alu) + 2**32
+            if int(self.alu) >= 2**31:
+                self.alu = int(self.alu) - 2**32
         elif operation == "mul":
             self.alu = int(left) * int(right)
-            if int(self.alu) <= -2 ** 31:
-                self.alu = int(self.alu) + 2 ** 32
-            if int(self.alu) >= 2 ** 31:
-                self.alu = int(self.alu) - 2 ** 32
+            if int(self.alu) <= -(2**31):
+                self.alu = int(self.alu) + 2**32
+            if int(self.alu) >= 2**31:
+                self.alu = int(self.alu) - 2**32
         elif operation == "div":
             self.alu = int(right) // int(left)
-            if int(self.alu) <= -2 ** 31:
-                self.alu = int(self.alu) + 2 ** 32
-            if int(self.alu) >= 2 ** 31:
-                self.alu = int(self.alu) - 2 ** 32
+            if int(self.alu) <= -(2**31):
+                self.alu = int(self.alu) + 2**32
+            if int(self.alu) >= 2**31:
+                self.alu = int(self.alu) - 2**32
         elif operation == "swap":
             self.signal_tos_push(right)
             self.signal_tick()
@@ -144,7 +144,7 @@ class DataPath:
                 self.output_buffer_int.append(str(right))
             else:
                 self.alu = int(right)
-                self.memory[int(left)] = {"opcode": self.memory[int(left)]["opcode"], "arg": int(right) % (2 ** 32)}
+                self.memory[int(left)] = {"opcode": self.memory[int(left)]["opcode"], "arg": int(right) % (2**32)}
 
     def in_alu(self, operation, left_sel=None, right_sel=None):
         left = None
@@ -161,17 +161,17 @@ class DataPath:
         self.flag()
 
     def signal_stack(self):
-        if int(self.alu) <= -2 ** 31:
-            self.alu = int(self.alu) + 2 ** 32
-        if int(self.alu) >= 2 ** 31:
-            self.alu = int(self.alu) - 2 ** 32
+        if int(self.alu) <= -(2**31):
+            self.alu = int(self.alu) + 2**32
+        if int(self.alu) >= 2**31:
+            self.alu = int(self.alu) - 2**32
         self.signal_tos_push(int(self.alu))
 
     def to_stack(self, arg):
-        if int(arg) <= -2 ** 31:
-            arg = int(arg) + 2 ** 32
-        if int(arg) >= 2 ** 31:
-            arg = int(arg) - 2 ** 32
+        if int(arg) <= -(2**31):
+            arg = int(arg) + 2**32
+        if int(arg) >= 2**31:
+            arg = int(arg) - 2**32
         self.signal_tos_push(int(arg))
 
     def signal_pop(self):
